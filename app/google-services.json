@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "922862192613",
+    "firebase_url": "https://rent4u-b7ee7.firebaseio.com",
+    "project_id": "rent4u-b7ee7",
+    "storage_bucket": "rent4u-b7ee7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922862192613:android:ae3165cd44cc2d6ea9110c",
+        "android_client_info": {
+          "package_name": "com.example.dell.rent4u"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922862192613-gpfig0rnbfub8jv57ubgspk45v0kmd60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dell.rent4u",
+            "certificate_hash": "2408dcfd3c25b74b42404b99eb7430f61a4979ec"
+          }
+        },
+        {
+          "client_id": "922862192613-5hu0p2kogrvt40bb0h9lnn09fmrvlp3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbzklGcifFZMGpgCw-FaLhBpvFAQyArmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922862192613-5hu0p2kogrvt40bb0h9lnn09fmrvlp3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
