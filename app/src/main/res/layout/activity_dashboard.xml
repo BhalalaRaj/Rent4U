@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EFEFEF"
     tools:context=".Dashboard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,19 +12,20 @@
         android:layout_height="match_parent">
 
         <soup.neumorphism.NeumorphImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/truck"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:scaleType="center"
-            style="@style/CustomShapeAppearance"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+            android:src="@drawable/bigtruck"
+            app:layout_constraintEnd_toEndOf="@+id/bus"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/imageButton2"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-            app:neumorph_shapeType="flat"
-            android:src="@drawable/truck" />
+            app:layout_constraintStart_toStartOf="@+id/bus"
+            app:layout_constraintTop_toBottomOf="@+id/bus"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="flat" />
 
         <View
             android:id="@+id/view"
@@ -36,20 +37,21 @@
             android:background="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
+            app:layout_constraintTop_toBottomOf="@+id/truck" />
 
         <soup.neumorphism.NeumorphImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/bus"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
-            style="@style/CustomShapeAppearance"
             android:layout_marginTop="16dp"
-            app:neumorph_shapeType="flat"
             android:scaleType="center"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton"
-            android:src="@drawable/bus" />
+            android:src="@drawable/bus"
+            app:layout_constraintEnd_toEndOf="@+id/car"
+            app:layout_constraintStart_toStartOf="@+id/car"
+            app:layout_constraintTop_toBottomOf="@+id/car"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="flat" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -59,13 +61,14 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <soup.neumorphism.NeumorphImageButton
-            android:id="@+id/imageButton"
-            style="@style/CustomShapeAppearance"
+            android:id="@+id/car"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
+            android:background="?android:attr/selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/car"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -79,51 +82,51 @@
             app:neumorph_insetTop="12dp"
             app:neumorph_shadowElevation="6dp"
             app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-            app:neumorph_shapeType="flat">
-
-
-        </soup.neumorphism.NeumorphImageButton>
+            app:neumorph_shapeType="flat" />
 
         <soup.neumorphism.NeumorphImageView
-            android:id="@+id/imageButton4"
+            android:id="@+id/bike"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
-            style="@style/CustomShapeAppearance"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerInside"
-            app:neumorph_shapeType="flat"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            android:src="@drawable/motorcycle"
+            app:layout_constraintBottom_toBottomOf="@+id/car"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/imageButton"
-            android:src= "@drawable/motorcycle" />
+            app:layout_constraintTop_toTopOf="@+id/car"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="flat" />
 
         <soup.neumorphism.NeumorphImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/minibus"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
             android:scaleType="center"
-            style="@style/CustomShapeAppearance"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton4"
-            app:layout_constraintStart_toStartOf="@+id/imageButton4"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton4"
-            app:neumorph_shapeType="flat"
-            android:src="@drawable/minibus" />
+            android:src="@drawable/minibus"
+            app:layout_constraintEnd_toEndOf="@+id/bike"
+            app:layout_constraintStart_toStartOf="@+id/bike"
+            app:layout_constraintTop_toBottomOf="@+id/bike"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="flat" />
 
         <soup.neumorphism.NeumorphImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/minitruck"
+            style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
             android:scaleType="center"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton5"
-            app:layout_constraintStart_toStartOf="@+id/imageButton5"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton5"
-            app:neumorph_shapeType="flat"
-            style="@style/CustomShapeAppearance"
-            android:src="@drawable/bigtruck" />
+            android:src="@drawable/truck"
+            app:layout_constraintEnd_toEndOf="@+id/minibus"
+            app:layout_constraintStart_toStartOf="@+id/minibus"
+            app:layout_constraintTop_toBottomOf="@+id/minibus"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="flat" />
 
         <TextView
             android:id="@+id/textView"
@@ -133,193 +136,186 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="14dp"
-            android:text="Welcome User"
+            android:text="Welcome Bhushan Maniyar"
             android:textAlignment="viewStart"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
+            app:layout_constraintBottom_toTopOf="@+id/car"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/recent_booking"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <soup.neumorphism.NeumorphTextView
-                    android:id="@+id/textView11"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Booking"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <soup.neumorphism.NeumorphImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="center"
-                    app:layout_constraintEnd_toEndOf="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11"
-                    app:srcCompat="@drawable/car" />
-
-                <soup.neumorphism.NeumorphTextView
-                    android:id="@+id/neumorphTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Morbi to Gandhinagar"
-                    android:textAlignment="center"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-                <soup.neumorphism.NeumorphTextView
-                    android:id="@+id/textView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Rent: 8 Rs Per Km"
-                    android:textAlignment="center"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/neumorphTextView" />
-
-                <soup.neumorphism.NeumorphButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    style="@style/Widget.Neumorph.CardView"
-                    android:text="  Book Now  "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/bg"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/view" >
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="0dp"
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Booking"
-                    android:textAlignment="textStart"
+                    android:text="Recent Booking"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <soup.neumorphism.NeumorphImageView
-                    android:id="@+id/neumorphImageView2"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:scaleType="center"
-                    android:src="@drawable/bus"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/car"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-                <soup.neumorphism.NeumorphTextView
-                    android:id="@+id/neumorphTextView3"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/recent_book_vehicle_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Swift "
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/recent_book_travels_name"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Morbi to Gir"
-                    android:textAlignment="center"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
+                    android:singleLine="false"
+                    android:text="From: Rangoli Travels"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/neumorphImageView2" />
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_book_vehicle_name" />
 
-                <soup.neumorphism.NeumorphTextView
-                    android:id="@+id/neumorphTextView2"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Rent: 20 Rs per Km "
-                    android:textAlignment="center"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/neumorphTextView3" />
+                    android:text="Rent: 8₹ per KM"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_book_travels_name" />
 
                 <soup.neumorphism.NeumorphButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_margin="2dp"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    style="@style/Widget.Neumorph.CardView"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="  Book Now  "
+                    android:layout_marginBottom="1dp"
+                    android:text="Book Now"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.504"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/neumorphTextView2" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/bg"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recent_booking">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/neumorphButton"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Book Now"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="center"
+                    android:src="@drawable/bus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Bus"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="From: Krishna Travels"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Rent: 25₹ per KM"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
