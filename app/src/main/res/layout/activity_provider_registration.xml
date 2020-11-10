@@ -394,7 +394,7 @@ any issue"
                     app:layout_constraintVertical_bias="0.0" />\
 
                 <soup.neumorphism.NeumorphButton
-                    android:id="@+id/neumorphButton4"
+                    android:id="@+id/licenseupload"
                     style="@style/Widget.Neumorph.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -413,6 +413,7 @@ any issue"
         </androidx.cardview.widget.CardView>
 
         <soup.neumorphism.NeumorphButton
+            android:id="@+id/Submit"
             style="@style/Widget.Neumorph.Button"
             android:layout_width="169dp"
             android:layout_height="wrap_content"
