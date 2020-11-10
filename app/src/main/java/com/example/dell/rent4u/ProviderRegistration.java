@@ -11,29 +11,45 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ProviderRegistration extends AppCompatActivity {
 
     Button adharupload,licenseupload,Submit;
     ImageView licenseimage,adharimage;
+    EditText Cname,Owner_name,provider_email,provider_password,provider_address,provider_city,provider_pincode;
     FirebaseStorage storage;
     StorageReference storageReference;
-    private Uri filePath;
+    private Uri filePath1;
+    private Uri filePath2;
+    FirebaseAuth mAuth;
+    FirebaseUser userId;
+    DatabaseReference mDatabase;
 
     // request code
-    private final int PICK_IMAGE_REQUEST = 22;
+    private final int PICK_IMAGE_REQUEST_ADHAR = 22;
+    private final int PICK_IMAGE_REQUEST_LICENSE = 44;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +62,19 @@ public class ProviderRegistration extends AppCompatActivity {
         licenseimage = findViewById(R.id.licenseimage);
         adharimage = findViewById(R.id.adharimage);
 
+        Cname = findViewById(R.id.Cname);
+        Owner_name = findViewById(R.id.Owner_name);
+        provider_email = findViewById(R.id.provider_email);
+        provider_password = findViewById(R.id.provider_password);
+        provider_address = findViewById(R.id.provider_address);
+        provider_city = findViewById(R.id.provider_city);
+        provider_pincode = findViewById(R.id.provider_pincode);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        mAuth = FirebaseAuth.getInstance();
+
         adharupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +85,7 @@ public class ProviderRegistration extends AppCompatActivity {
         licenseupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SelectAdharLicense();
+                SelectLicenseImage();
 
             }
         });
@@ -64,14 +93,58 @@ public class ProviderRegistration extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImage();
+                crateAcc(provider_email.getText().toString().trim(), provider_password.getText().toString().trim());
+                uploadImage1();
+                uploadImage2();
             }
         });
 
     }
+    private void crateAcc(String providerEmail, String providerPassword) {
+
+        mAuth.createUserWithEmailAndPassword(providerEmail, providerPassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in userId's information
+                            userId = mAuth.getCurrentUser();
+                            Map<String, String> data = new HashMap<>();
+                            data.put("Company_Name", Cname.getText().toString().trim());
+                            data.put("Owner_Name", Owner_name.getText().toString().trim());
+                            data.put("Email", providerEmail);
+                            data.put("Password", providerPassword);
+                            data.put("Address", provider_address.getText().toString().trim());
+                            data.put("City", provider_city.getText().toString().trim());
+                            data.put("City_PinCode", provider_pincode.getText().toString().trim());
+                            data.put("License", "false");
+
+                            writeUser(data);
+
+                            Toast.makeText(ProviderRegistration.this, "Authentication Successful.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // If sign in fails, display a message to the userId.
+                            Toast.makeText(ProviderRegistration.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    private void writeUser(Map<String, String> data) {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Rental_Provider").child(userId.getUid());
+        mDatabase.setValue(data);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId.getUid());
+        Map<String, String> a = new HashMap<>();
+        a.put(userId.getUid(),"Rental_Provider");
+        mDatabase.setValue(a);
+        startActivity(new Intent(ProviderRegistration.this, Login.class));
+        Toast.makeText(ProviderRegistration.this, "Your data Successfully Registered now you can Login", Toast.LENGTH_LONG).show();
+        finish();
+    }
     private void SelectAdharImage()
     {
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -79,18 +152,14 @@ public class ProviderRegistration extends AppCompatActivity {
                 Intent.createChooser(
                         intent,
                         "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
+                PICK_IMAGE_REQUEST_ADHAR);
     }
-    private void SelectAdharLicense()
+    private void SelectLicenseImage()
     {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."), PICK_IMAGE_REQUEST_LICENSE);
     }
 
     @Override
@@ -99,22 +168,31 @@ public class ProviderRegistration extends AppCompatActivity {
                                     Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
         // resultCode is RESULT_OK
         // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
+        if (requestCode == PICK_IMAGE_REQUEST_ADHAR && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
-            filePath = data.getData();
+            filePath1 = data.getData();
             try {
-
                 // Setting image on image view using Bitmap
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath1);
                 adharimage.setImageBitmap(bitmap);
             }
-
+            catch (IOException e) {
+                // Log the exception
+                e.printStackTrace();
+            }
+        }
+        else if(requestCode == PICK_IMAGE_REQUEST_LICENSE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the Uri of data
+            filePath2 = data.getData();
+            try {
+                // Setting image on image view using Bitmap
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath2);
+                adharimage.setImageBitmap(bitmap);
+            }
             catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
@@ -122,24 +200,22 @@ public class ProviderRegistration extends AppCompatActivity {
         }
     }
 
-    private void uploadImage() {
-        if (filePath != null) {
-
+    private void uploadImage1() {
+        if (filePath1 != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("images/" + userId.getUid());
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            ref.putFile(filePath1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                                 @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                                     // Image uploaded successfully
                                     // Dismiss dialog
@@ -147,6 +223,53 @@ public class ProviderRegistration extends AppCompatActivity {
                                     Toast.makeText(ProviderRegistration.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
                                 }
                             })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            // Error, Image not uploaded
+                            progressDialog.dismiss();
+                            Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(
+                            new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                                // Progress Listener for loading
+                                // percentage on the dialog box
+                                @Override
+                                public void onProgress(
+                                        UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                                }
+                            });
+        }
+    }
+    private void uploadImage2() {
+        if (filePath2 != null) {
+            // Code for showing progressDialog while uploading
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            // Defining the child of storageReference
+            StorageReference ref = storageReference.child("images/" + userId.getUid());
+
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    // Image uploaded successfully
+                    // Dismiss dialog
+                    progressDialog.dismiss();
+                    Toast.makeText(ProviderRegistration.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                }
+            })
 
                     .addOnFailureListener(new OnFailureListener() {
                         @Override

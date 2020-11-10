@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/register" />
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/User_name"
+            android:id="@+id/company_name"
             style="@style/CustomShapeAppearance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,6 +49,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/Cname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -81,6 +82,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/Owner_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -114,6 +116,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/provider_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -147,6 +150,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/provider_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -181,6 +185,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/provider_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -213,6 +218,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/provider_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -236,6 +242,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
+                android:id="@+id/provider_pincode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
