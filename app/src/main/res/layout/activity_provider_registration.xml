@@ -161,6 +161,40 @@
 
         </soup.neumorphism.NeumorphCardView>
 
+
+        <TextView
+            android:id="@+id/contact_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Contact No:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/User_password" />
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/contactcard"
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/User_password"
+            app:layout_constraintHorizontal_bias="0.568"
+            app:layout_constraintStart_toStartOf="@+id/User_password"
+            app:layout_constraintTop_toBottomOf="@+id/contact_txt"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/provider_contactno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
+
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
@@ -169,16 +203,16 @@
             android:text="Address:"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/User_password" />
+            app:layout_constraintTop_toBottomOf="@+id/contactcard" />
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/User_address"
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/User_password"
+            app:layout_constraintEnd_toEndOf="@+id/contactcard"
             app:layout_constraintHorizontal_bias="0.568"
-            app:layout_constraintStart_toStartOf="@+id/User_password"
+            app:layout_constraintStart_toStartOf="@+id/contactcard"
             app:layout_constraintTop_toBottomOf="@+id/address"
             app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
             app:neumorph_shapeType="basin">
