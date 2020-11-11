@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/register" />
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/company_name"
+            android:id="@+id/User_name"
             style="@style/CustomShapeAppearance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
-                android:id="@+id/Cname"
+                android:id="@+id/provider_companyname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -82,15 +82,14 @@
             app:neumorph_shapeType="basin">
 
             <EditText
-                android:id="@+id/Owner_name"
+                android:id="@+id/provider_ownername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:inputType="number"
                 android:padding="10dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textSize="15sp"  />
+                android:textSize="15sp" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -158,7 +157,7 @@
                 android:padding="10dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textSize="15sp"  />
+                android:textSize="15sp" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -226,7 +225,7 @@
                 android:padding="10dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textSize="15sp"  />
+                android:textSize="15sp" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -242,7 +241,7 @@
             app:neumorph_shapeType="basin">
 
             <EditText
-                android:id="@+id/provider_pincode"
+                android:id="@+id/provider_citypincode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -394,7 +393,7 @@ any issue"
                     android:singleLine="false"
                     android:text="I am uploading this document without
 any issue"
-                    app:layout_constraintBottom_toTopOf="@+id/neumorphButton4"
+                    app:layout_constraintBottom_toTopOf="@+id/licenseupload"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/licenseimage"
                     app:layout_constraintTop_toBottomOf="@+id/licensetxt"
@@ -420,7 +419,7 @@ any issue"
         </androidx.cardview.widget.CardView>
 
         <soup.neumorphism.NeumorphButton
-            android:id="@+id/Submit"
+            android:id="@+id/submit"
             style="@style/Widget.Neumorph.Button"
             android:layout_width="169dp"
             android:layout_height="wrap_content"

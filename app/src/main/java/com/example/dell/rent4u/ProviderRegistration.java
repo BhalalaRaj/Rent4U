@@ -36,9 +36,9 @@ import java.util.UUID;
 
 public class ProviderRegistration extends AppCompatActivity {
 
-    Button adharupload,licenseupload,Submit;
-    ImageView licenseimage,adharimage;
-    EditText Cname,Owner_name,provider_email,provider_password,provider_address,provider_city,provider_pincode;
+    Button adharupload, licenseupload, Submit;
+    ImageView licenseimage, adharimage;
+    EditText Cname, Owner_name, provider_email, provider_password, provider_address, provider_city, provider_pincode;
     FirebaseStorage storage;
     StorageReference storageReference;
     private Uri filePath1;
@@ -47,6 +47,7 @@ public class ProviderRegistration extends AppCompatActivity {
     FirebaseUser userId;
     DatabaseReference mDatabase;
 
+    Map<String, String> data;
     // request code
     private final int PICK_IMAGE_REQUEST_ADHAR = 22;
     private final int PICK_IMAGE_REQUEST_LICENSE = 44;
@@ -58,17 +59,17 @@ public class ProviderRegistration extends AppCompatActivity {
 
         adharupload = findViewById(R.id.adharupload);
         licenseupload = findViewById(R.id.licenseupload);
-        Submit = findViewById(R.id.Submit);
+        Submit = findViewById(R.id.submit);
         licenseimage = findViewById(R.id.licenseimage);
         adharimage = findViewById(R.id.adharimage);
 
-        Cname = findViewById(R.id.Cname);
-        Owner_name = findViewById(R.id.Owner_name);
+        Cname = findViewById(R.id.provider_companyname);
+        Owner_name = findViewById(R.id.provider_ownername);
         provider_email = findViewById(R.id.provider_email);
         provider_password = findViewById(R.id.provider_password);
         provider_address = findViewById(R.id.provider_address);
         provider_city = findViewById(R.id.provider_city);
-        provider_pincode = findViewById(R.id.provider_pincode);
+        provider_pincode = findViewById(R.id.provider_citypincode);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -94,12 +95,11 @@ public class ProviderRegistration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 crateAcc(provider_email.getText().toString().trim(), provider_password.getText().toString().trim());
-                uploadImage1();
-                uploadImage2();
             }
         });
 
     }
+
     private void crateAcc(String providerEmail, String providerPassword) {
 
         mAuth.createUserWithEmailAndPassword(providerEmail, providerPassword)
@@ -109,7 +109,7 @@ public class ProviderRegistration extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in userId's information
                             userId = mAuth.getCurrentUser();
-                            Map<String, String> data = new HashMap<>();
+                            data = new HashMap<>();
                             data.put("Company_Name", Cname.getText().toString().trim());
                             data.put("Owner_Name", Owner_name.getText().toString().trim());
                             data.put("Email", providerEmail);
@@ -118,8 +118,7 @@ public class ProviderRegistration extends AppCompatActivity {
                             data.put("City", provider_city.getText().toString().trim());
                             data.put("City_PinCode", provider_pincode.getText().toString().trim());
                             data.put("License", "false");
-
-                            writeUser(data);
+                            uploadImage1();
 
                             Toast.makeText(ProviderRegistration.this, "Authentication Successful.",
                                     Toast.LENGTH_SHORT).show();
@@ -132,19 +131,20 @@ public class ProviderRegistration extends AppCompatActivity {
                     }
                 });
     }
+
     private void writeUser(Map<String, String> data) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Rental_Provider").child(userId.getUid());
         mDatabase.setValue(data);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId.getUid());
         Map<String, String> a = new HashMap<>();
-        a.put(userId.getUid(),"Rental_Provider");
+        a.put(userId.getUid(), "Rental_Provider");
         mDatabase.setValue(a);
         startActivity(new Intent(ProviderRegistration.this, Login.class));
         Toast.makeText(ProviderRegistration.this, "Your data Successfully Registered now you can Login", Toast.LENGTH_LONG).show();
         finish();
     }
-    private void SelectAdharImage()
-    {
+
+    private void SelectAdharImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -154,8 +154,8 @@ public class ProviderRegistration extends AppCompatActivity {
                         "Select Image from here..."),
                 PICK_IMAGE_REQUEST_ADHAR);
     }
-    private void SelectLicenseImage()
-    {
+
+    private void SelectLicenseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -165,8 +165,7 @@ public class ProviderRegistration extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
-                                    Intent data)
-    {
+                                    Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
@@ -179,21 +178,18 @@ public class ProviderRegistration extends AppCompatActivity {
                 // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath1);
                 adharimage.setImageBitmap(bitmap);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
-        }
-        else if(requestCode == PICK_IMAGE_REQUEST_LICENSE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        } else if (requestCode == PICK_IMAGE_REQUEST_LICENSE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
             filePath2 = data.getData();
             try {
                 // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath2);
-                adharimage.setImageBitmap(bitmap);
-            }
-            catch (IOException e) {
+                licenseimage.setImageBitmap(bitmap);
+            } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
@@ -204,58 +200,54 @@ public class ProviderRegistration extends AppCompatActivity {
         if (filePath1 != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
+            progressDialog.setTitle("Uploading Adhar Card...");
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("images/" + userId.getUid());
+            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid()+"/"+"1");
 
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Image uploaded successfully
+                    // Dismiss dialog
+                    progressDialog.dismiss();
+                    Toast.makeText(ProviderRegistration.this, "Adhar Card Uploaded!!", Toast.LENGTH_SHORT).show();
+                    uploadImage2();
 
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-                                    // Image uploaded successfully
-                                    // Dismiss dialog
-                                    progressDialog.dismiss();
-                                    Toast.makeText(ProviderRegistration.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-
-                    .addOnFailureListener(new OnFailureListener() {
+                    // Error, Image not uploaded
+                    progressDialog.dismiss();
+                    Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        // Progress Listener for loading
+                        // percentage on the dialog box
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onProgress(
+                                UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploading " + (int) progress + "%");
                         }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                                }
-                            });
+                    });
         }
     }
+
     private void uploadImage2() {
         if (filePath2 != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
+            progressDialog.setTitle("Uploading License...");
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("images/" + userId.getUid());
+            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid()+"/"+"2");
 
             // adding listeners on upload
             // or failure of image
@@ -263,35 +255,31 @@ public class ProviderRegistration extends AppCompatActivity {
 
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                     // Image uploaded successfully
                     // Dismiss dialog
                     progressDialog.dismiss();
-                    Toast.makeText(ProviderRegistration.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProviderRegistration.this, "License Uploaded!!", Toast.LENGTH_SHORT).show();
+                    writeUser(data);
                 }
-            })
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    // Error, Image not uploaded
+                    progressDialog.dismiss();
+                    Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                                }
-                            });
+                // Progress Listener for loading
+                // percentage on the dialog box
+                @Override
+                public void onProgress(
+                        UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploading " + (int) progress + "%");
+                }
+            });
         }
     }
 }
