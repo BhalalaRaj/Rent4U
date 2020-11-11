@@ -38,7 +38,7 @@ public class ProviderRegistration extends AppCompatActivity {
 
     Button adharupload, licenseupload, Submit;
     ImageView licenseimage, adharimage;
-    EditText Cname, Owner_name, provider_email, provider_password, provider_address, provider_city, provider_pincode;
+    EditText Cname, Owner_name, provider_email, provider_password, provider_address, provider_city, provider_pincode, provider_contactno;
     FirebaseStorage storage;
     StorageReference storageReference;
     private Uri filePath1;
@@ -69,6 +69,7 @@ public class ProviderRegistration extends AppCompatActivity {
         provider_password = findViewById(R.id.provider_password);
         provider_address = findViewById(R.id.provider_address);
         provider_city = findViewById(R.id.provider_city);
+        provider_contactno = findViewById(R.id.provider_contactno);
         provider_pincode = findViewById(R.id.provider_citypincode);
 
         storage = FirebaseStorage.getInstance();
@@ -116,6 +117,7 @@ public class ProviderRegistration extends AppCompatActivity {
                             data.put("Password", providerPassword);
                             data.put("Address", provider_address.getText().toString().trim());
                             data.put("City", provider_city.getText().toString().trim());
+                            data.put("Contact No:",provider_contactno.getText().toString().trim());
                             data.put("City_PinCode", provider_pincode.getText().toString().trim());
                             data.put("License", "false");
                             uploadImage1();
