@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dell.rent4u">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +25,8 @@
         <activity android:name=".ProviderDashboard" />
         <activity android:name=".UserRegistration" />
         <activity android:name=".ProviderRegistration" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Bill"></activity>
     </application>
 
 </manifest>
