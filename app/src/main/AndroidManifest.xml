@@ -25,7 +25,7 @@
         <activity android:name=".ProviderDashboard" />
         <activity android:name=".UserRegistration" />
         <activity android:name=".ProviderRegistration" />
-        <activity android:name=".Login"/>
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>
