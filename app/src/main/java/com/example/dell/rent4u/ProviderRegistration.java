@@ -32,7 +32,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class ProviderRegistration extends AppCompatActivity {
 
@@ -88,7 +87,6 @@ public class ProviderRegistration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SelectLicenseImage();
-
             }
         });
 
@@ -117,7 +115,7 @@ public class ProviderRegistration extends AppCompatActivity {
                             data.put("Password", providerPassword);
                             data.put("Address", provider_address.getText().toString().trim());
                             data.put("City", provider_city.getText().toString().trim());
-                            data.put("Contact No:",provider_contactno.getText().toString().trim());
+                            data.put("Contact No:", provider_contactno.getText().toString().trim());
                             data.put("City_PinCode", provider_pincode.getText().toString().trim());
                             data.put("License", "false");
                             uploadImage1();
@@ -206,7 +204,7 @@ public class ProviderRegistration extends AppCompatActivity {
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid()+"/"+"1");
+            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid() + "/" + "1");
 
             // adding listeners on upload
             // or failure of image
@@ -229,15 +227,15 @@ public class ProviderRegistration extends AppCompatActivity {
                     Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        // Progress Listener for loading
-                        // percentage on the dialog box
-                        @Override
-                        public void onProgress(
-                                UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            progressDialog.setMessage("Uploading " + (int) progress + "%");
-                        }
-                    });
+                // Progress Listener for loading
+                // percentage on the dialog box
+                @Override
+                public void onProgress(
+                        UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploading " + (int) progress + "%");
+                }
+            });
         }
     }
 
@@ -249,7 +247,7 @@ public class ProviderRegistration extends AppCompatActivity {
             progressDialog.show();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid()+"/"+"2");
+            StorageReference ref = storageReference.child("Provider Images").child(userId.getUid() + "/" + "2");
 
             // adding listeners on upload
             // or failure of image
