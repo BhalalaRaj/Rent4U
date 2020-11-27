@@ -355,7 +355,7 @@
 any issue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/adharimage"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />\
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <soup.neumorphism.NeumorphButton
                     android:id="@+id/adharupload"
