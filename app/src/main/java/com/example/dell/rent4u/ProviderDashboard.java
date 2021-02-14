@@ -21,6 +21,8 @@ public class ProviderDashboard extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase mDatabase;
 
+    static public ProviderDataClass PROVIDER_DATA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class ProviderDashboard extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
-            
+            PROVIDER_DATA = new ProviderDataClass(user.getUid());
         }
 
 
