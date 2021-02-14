@@ -129,7 +129,9 @@ public class Vehicle_detail extends AppCompatActivity {
         dataMap.put("Rent", rent.getText().toString().trim());
         dataMap.put("Seating", seating_cap.getText().toString().trim());
         dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.id);
-        dataMap.put("VehicleImages", "/VehicleImages/" + VehicleId);
+        dataMap.put("Front", "/VehicleImages/" + VehicleId + "/front");
+        dataMap.put("Side", "/VehicleImages/" + VehicleId + "/side");
+        dataMap.put("Interior", "/VehicleImages/" + VehicleId + "/interior");
         databaseReference.child(VehicleId).setValue(dataMap);
 
     }
@@ -272,7 +274,7 @@ public class Vehicle_detail extends AppCompatActivity {
         if (sideImagePath != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading Front Image...");
+            progressDialog.setTitle("Uploading Side Image...");
             progressDialog.show();
 
             // Defining the child of storageReference
@@ -287,7 +289,7 @@ public class Vehicle_detail extends AppCompatActivity {
                     // Image uploaded successfully
                     // Dismiss dialog
                     progressDialog.dismiss();
-                    Toast.makeText(Vehicle_detail.this, "License Uploaded!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Vehicle_detail.this, "Side Image Uploaded!!", Toast.LENGTH_SHORT).show();
                     uploadInteriorImage();
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -317,7 +319,7 @@ public class Vehicle_detail extends AppCompatActivity {
         if (interiorImagePath != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading Front Image...");
+            progressDialog.setTitle("Uploading Interior Image...");
             progressDialog.show();
 
             // Defining the child of storageReference
