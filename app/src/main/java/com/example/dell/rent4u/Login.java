@@ -77,13 +77,15 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
-                            if(userType.equals("Customer")) {
+                            String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
+                            if (userType.equals("Customer")) {
                                 Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(Login.this, Dashboard.class));
                             } else {

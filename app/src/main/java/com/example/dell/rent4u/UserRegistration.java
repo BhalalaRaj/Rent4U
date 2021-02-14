@@ -89,7 +89,7 @@ public class UserRegistration extends AppCompatActivity {
     private void writeUser(Map<String, String> data) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Customer").child(userId.getUid());
         mDatabase.setValue(data);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId.getUid());
         Map<String, String> a = new HashMap<>();
         a.put(userId.getUid(),"Customer");
         mDatabase.setValue(a);
