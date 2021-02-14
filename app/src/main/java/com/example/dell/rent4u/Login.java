@@ -83,7 +83,6 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
                             if (userType.equals("Customer")) {
                                 Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
@@ -99,8 +98,6 @@ public class Login extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-
-
                 } else {
                     Toast.makeText(Login.this, "Invalid credentials :(", Toast.LENGTH_LONG).show();
                 }

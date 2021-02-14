@@ -67,6 +67,8 @@
             android:id="@+id/btn_viewAllVehicle"
             style="@style/Widget.Neumorph.Button"
             android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="200dp"
             android:layout_marginTop="16dp"
             android:text="View All Vehicle"

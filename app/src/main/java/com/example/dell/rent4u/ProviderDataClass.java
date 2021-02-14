@@ -4,11 +4,8 @@ class ProviderDataClass {
 
     String id, name, city, address;
 
-    public ProviderDataClass(String id, String name, String city, String address) {
+    public ProviderDataClass(String id) {
         this.id = id;
-        this.name = name;
-        this.city = city;
-        this.address = address;
     }
 
     public String getId() {
