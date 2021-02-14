@@ -10,5 +10,8 @@ public class Vehicle_detail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_detail);
+
+
+
     }
 }

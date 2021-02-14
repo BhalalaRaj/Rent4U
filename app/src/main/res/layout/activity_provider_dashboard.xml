@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,160 +7,93 @@
     android:background="#EFEFEF"
     tools:context=".ProviderDashboard">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-      <TextView
-          android:id="@+id/welcome_provider"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginEnd="8dp"
-          android:text="Welcome Provider"
-          android:textSize="20sp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/welcome_provider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Welcome Provider"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
-          android:id="@+id/textView2"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="16dp"
-          android:layout_marginEnd="8dp"
-          android:text="On Rent Vehicle"
-          android:textSize="15sp"
-          android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/welcome_provider" />
-
-      <androidx.cardview.widget.CardView
-          android:id="@+id/recyclerView"
-          style="@style/Widget.Neumorph.CardView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="10dp"
-          android:layout_marginTop="8dp"
-          app:cardCornerRadius="20dp"
-
-          app:layout_constraintStart_toStartOf="@+id/textView2"
-          app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
-
-          <ImageView
-              android:id="@+id/row_vehicle_image"
-              android:layout_width="150dp"
-              android:layout_height="100dp"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:layout_marginBottom="8dp"
-              android:scaleType="center"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:srcCompat="@drawable/car" />
-
-          <TextView
-              android:id="@+id/row_vehicleName"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:layout_marginEnd="8dp"
-              android:text="Audi Q7 | GJ36-03A-2992"
-              android:textSize="15sp"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
-              app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-              app:layout_constraintTop_toTopOf="parent" />
-
-          <TextView
-              android:id="@+id/row_seatingCapacity"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:layout_marginEnd="8dp"
-              android:text="Rider: ABCD"
-              android:textSize="15sp"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
-              app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-              app:layout_constraintTop_toBottomOf="@+id/row_vehicleName" />
-
-          <TextView
-              android:id="@+id/row_vehicleType"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:layout_marginEnd="8dp"
-              android:text="Destination: Goa"
-              android:textSize="10sp"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
-              app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-              app:layout_constraintTop_toBottomOf="@+id/row_seatingCapacity" />
-
-          <TextView
-              android:id="@+id/row_vehicleRent"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
-              android:layout_marginEnd="8dp"
-              android:text="Booking Date: 25-09-2020 07:10 AM"
-              android:textSize="10sp"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.0"
-              app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-              app:layout_constraintTop_toBottomOf="@+id/row_vehicleType" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="On Rent Vehicle"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_provider" />
 
 
-      </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_noVehicleOnRent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Vehicle on Rent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-      </androidx.cardview.widget.CardView>
-
-
-      <soup.neumorphism.NeumorphButton
-          android:id="@+id/neumorphButton2"
-          style="@style/Widget.Neumorph.Button"
-          android:layout_width="match_parent"
-          android:layout_height="200dp"
-          android:layout_marginTop="16dp"
-          android:text="View All Vehicle"
-          android:textAlignment="center"
-          android:textSize="25sp"
-          android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-          app:layout_constraintStart_toStartOf="@+id/recyclerView"
-          app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-      <soup.neumorphism.NeumorphButton
-          style="@style/Widget.Neumorph.Button"
-          android:layout_width="match_parent"
-          android:layout_height="200dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="16dp"
-          android:layout_marginEnd="8dp"
-          android:text="View History"
-          android:textAlignment="center"
-          android:textSize="25sp"
-          android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/neumorphButton2" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_onRentItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            tools:listitem="@layout/on_rent_item" />
 
 
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/btn_viewAllVehicle"
+            style="@style/Widget.Neumorph.Button"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:text="View All Vehicle"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_onRentItem" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/btn_viewHistory"
+            style="@style/Widget.Neumorph.Button"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="View History"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_viewAllVehicle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
