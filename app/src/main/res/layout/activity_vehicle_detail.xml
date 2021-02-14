@@ -26,41 +26,140 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/pincode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Pin Code:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/addvehicle" />
+        <TextView
+            android:id="@+id/VehicleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Vehicle Type:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/addvehicle" />
 
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/pincodecard"
-        style="@style/Widget.Neumorph.CardView"
+        android:id="@+id/vehicleType"
+        style="@style/CustomShapeAppearance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/User_city"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/User_city"
-        app:layout_constraintTop_toBottomOf="@+id/pincode"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VehicleType"
         app:neumorph_shapeType="basin">
 
         <EditText
-            android:id="@+id/Model_name"
+            android:id="@+id/Vehicle_type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:inputType="number"
+            android:inputType="text"
             android:padding="10dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textSize="15sp" />
     </soup.neumorphism.NeumorphCardView>
 
+        <TextView
+            android:id="@+id/ModelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Model Name:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/vehicleType" />
 
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/modelName"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ModelName"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/Model_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
+        <TextView
+            android:id="@+id/CityOfAvailability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="City of Availability:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/modelName" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/cityofAvailability"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CityOfAvailability"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/city_ava"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
+        <TextView
+            android:id="@+id/Condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Condition :"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/cityofAvailability" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/condition_vehicle"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Condition"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/condition_veh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/Front"
@@ -72,7 +171,7 @@
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/pincodecard"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/pincodecard">
+        app:layout_constraintTop_toBottomOf="@+id/condition_vehicle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -273,7 +372,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/submit"
+            style="@style/Widget.Neumorph.Button"
+            android:layout_width="169dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:text="Submit"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/Side"
+            app:layout_constraintStart_toStartOf="@+id/Side"
+            app:layout_constraintTop_toBottomOf="@+id/Side"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

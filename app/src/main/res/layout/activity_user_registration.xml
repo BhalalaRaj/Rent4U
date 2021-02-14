@@ -30,7 +30,7 @@
             app:layout_constraintVertical_bias="0.005" />
 
         <TextView
-            android:id="@+id/companyname"
+            android:id="@+id/VehicleType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/register" />
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/User_name"
+            android:id="@+id/vehicleType"
             style="@style/CustomShapeAppearance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/companyname"
+            app:layout_constraintTop_toBottomOf="@+id/VehicleType"
             app:neumorph_shapeType="basin">
 
             <EditText
@@ -72,15 +72,15 @@
             android:text="Mobile :"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/User_name" />
+            app:layout_constraintTop_toBottomOf="@+id/vehicleType" />
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/User_mobile"
             style="@style/CustomShapeAppearance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/User_name"
-            app:layout_constraintStart_toStartOf="@+id/User_name"
+            app:layout_constraintEnd_toEndOf="@+id/vehicleType"
+            app:layout_constraintStart_toStartOf="@+id/vehicleType"
             app:layout_constraintTop_toBottomOf="@+id/ownername"
             app:neumorph_shapeType="basin">
 
