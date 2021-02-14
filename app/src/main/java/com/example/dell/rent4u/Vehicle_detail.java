@@ -81,6 +81,13 @@ public class Vehicle_detail extends AppCompatActivity {
             }
         });
 
+        Front_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectFrontImage();
+            }
+        });
+
         Interior_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +114,7 @@ public class Vehicle_detail extends AppCompatActivity {
 
     }
 
-    private void getUniqueVehicleId(){
+    private void getUniqueVehicleId() {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Vehicles");
         VehicleId = databaseReference.push().getKey();
     }
@@ -122,9 +129,7 @@ public class Vehicle_detail extends AppCompatActivity {
         dataMap.put("Rent", rent.getText().toString().trim());
         dataMap.put("Seating", seating_cap.getText().toString().trim());
         dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.id);
-        dataMap.put("Front", "gs://rent4u-b7ee7.appspot.com/VehicleImages/" + VehicleId + "/front");
-        dataMap.put("Side", "gs://rent4u-b7ee7.appspot.com/VehicleImages/" + VehicleId + "/side");
-        dataMap.put("Interior", "gs://rent4u-b7ee7.appspot.com/VehicleImages/" + VehicleId + "/interior");
+        dataMap.put("VehicleImages", "/VehicleImages/" + VehicleId);
         databaseReference.child(VehicleId).setValue(dataMap);
 
     }
@@ -351,5 +356,4 @@ public class Vehicle_detail extends AppCompatActivity {
             });
         }
     }
-
 }
