@@ -305,7 +305,7 @@
             app:layout_constraintGuide_begin="16dp" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/adharcard_card"
+            android:id="@+id/Front"
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/adharimage"
+                    android:id="@+id/Front_img"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -342,7 +342,7 @@
                     android:text="Adhar Card.jpeg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/adharimage"
+                    app:layout_constraintStart_toEndOf="@+id/Front_img"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -354,11 +354,11 @@
                     android:text="I am uploading this document without
 any issue"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/adharimage"
+                    app:layout_constraintStart_toEndOf="@+id/Front_img"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <soup.neumorphism.NeumorphButton
-                    android:id="@+id/adharupload"
+                    android:id="@+id/Front_upload"
                     style="@style/Widget.Neumorph.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -369,7 +369,7 @@ any issue"
                     android:textAllCaps="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/adharimage"
+                    app:layout_constraintTop_toBottomOf="@+id/Front_img"
                     app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -387,7 +387,7 @@ any issue"
             app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="@+id/pincodecard"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/adharcard_card">
+            app:layout_constraintTop_toBottomOf="@+id/Front">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -32,7 +32,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class ProviderRegistration extends AppCompatActivity {
 
@@ -57,11 +56,11 @@ public class ProviderRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_registration);
 
-        adharupload = findViewById(R.id.adharupload);
+        adharupload = findViewById(R.id.Front_upload);
         licenseupload = findViewById(R.id.licenseupload);
         Submit = findViewById(R.id.submit);
         licenseimage = findViewById(R.id.licenseimage);
-        adharimage = findViewById(R.id.adharimage);
+        adharimage = findViewById(R.id.Front_img);
 
         Cname = findViewById(R.id.provider_companyname);
         Owner_name = findViewById(R.id.provider_ownername);
