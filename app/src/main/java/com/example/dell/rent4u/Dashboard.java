@@ -13,8 +13,6 @@ import soup.neumorphism.NeumorphImageButton;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
-
-
     NeumorphImageButton btn_car, btn_bike, btn_truck, btn_miniTruck, btn_bus, btn_miniBus;
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
