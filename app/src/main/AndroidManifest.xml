@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".booking"></activity>
-        <activity android:name=".ViewVehicle" />
+        <activity android:name=".ViewVehicle"></activity>
         <activity android:name=".Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

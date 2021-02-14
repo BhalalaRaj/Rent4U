@@ -17,6 +17,8 @@ public class ViewVehicle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_vehicle);
 
+        fab_addVehicle = findViewById(R.id.fab_addVehicle);
+
         fab_addVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
