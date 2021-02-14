@@ -52,7 +52,27 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 getTruck();
                 break;
             }
+
+            case R.id.bus: {
+                getBus();
+                break;
+            }
+
+            case R.id.car: {
+                getCar();
+                break;
+            }
+
+            default: {
+                onClick(v);
+            }
         }
+    }
+
+    private void getCar() {
+    }
+
+    private void getBus() {
     }
 
     private void getTruck() {
