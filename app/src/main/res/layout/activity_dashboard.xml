@@ -84,7 +84,7 @@
             app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
             app:neumorph_shapeType="flat" />
 
-        <soup.neumorphism.NeumorphImageView
+        <soup.neumorphism.NeumorphImageButton
             android:id="@+id/bike"
             style="@style/Widget.Neumorph.ImageButton"
             android:layout_width="145dp"

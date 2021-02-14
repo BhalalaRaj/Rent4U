@@ -15,6 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class Login extends AppCompatActivity {
 
     // Firebase
     private FirebaseAuth firebaseAuth;
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +46,11 @@ public class Login extends AppCompatActivity {
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if(!(email.getText().toString().trim().equals("") && password.getText().toString().trim().equals(""))){
+            public void onClick(View v) {
+                if (!(email.getText().toString().trim().equals("") && password.getText().toString().trim().equals(""))) {
                     startLogin(email.getText().toString().trim(), password.getText().toString().trim());
                 } else {
-                    Toast.makeText(Login.this,"Empty Fields",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -64,12 +71,36 @@ public class Login extends AppCompatActivity {
         });
 
     }
-    public void startLogin(String email, String password){
+
+    public void startLogin(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(Login.this, Dashboard.class));
+
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
+                            if (userType.equals("Customer")) {
+                                Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(Login.this, Dashboard.class));
+                            } else {
+                                Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(Login.this, ProviderDashboard.class));
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
+
                 } else {
                     Toast.makeText(Login.this, "Invalid credentials :(", Toast.LENGTH_LONG).show();
                 }

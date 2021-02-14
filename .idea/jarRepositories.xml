@@ -27,6 +27,7 @@
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
     </remote-repository>
     <remote-repository>
+<<<<<<< HEAD
       <option name="id" value="C:\Users\Dell\AppData\Local\Android\Sdk\extras\google\m2repository" />
       <option name="name" value="C:\Users\Dell\AppData\Local\Android\Sdk\extras\google\m2repository" />
       <option name="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/extras/google/m2repository/" />
@@ -40,6 +41,21 @@
       <option name="id" value="C:\Users\Dell\AppData\Local\Android\Sdk\extras\m2repository" />
       <option name="name" value="C:\Users\Dell\AppData\Local\Android\Sdk\extras\m2repository" />
       <option name="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/extras/m2repository/" />
+=======
+      <option name="id" value="I:\Android\sdk\extras\google\m2repository" />
+      <option name="name" value="I:\Android\sdk\extras\google\m2repository" />
+      <option name="url" value="file:/I:/Android/sdk/extras/google/m2repository/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="I:\Android\sdk\extras\android\m2repository" />
+      <option name="name" value="I:\Android\sdk\extras\android\m2repository" />
+      <option name="url" value="file:/I:/Android/sdk/extras/android/m2repository/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="I:\Android\sdk\extras\m2repository" />
+      <option name="name" value="I:\Android\sdk\extras\m2repository" />
+      <option name="url" value="file:/I:/Android/sdk/extras/m2repository/" />
+>>>>>>> origin/master
     </remote-repository>
   </component>
 </project>
