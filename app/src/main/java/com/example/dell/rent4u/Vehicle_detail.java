@@ -133,6 +133,8 @@ public class Vehicle_detail extends AppCompatActivity {
         dataMap.put("Side", "/VehicleImages/" + VehicleId + "/side");
         dataMap.put("Interior", "/VehicleImages/" + VehicleId + "/interior");
         databaseReference.child(VehicleId).setValue(dataMap);
+        startActivity(new Intent(Vehicle_detail.this, ViewVehicle.class));
+        finish();
 
     }
 
