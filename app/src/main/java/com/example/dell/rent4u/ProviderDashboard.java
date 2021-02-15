@@ -32,13 +32,11 @@ public class ProviderDashboard extends AppCompatActivity {
         btn_viewHistory = findViewById(R.id.btn_viewHistory);
         tv_noVehicleOnRent = findViewById(R.id.tv_noVehicleOnRent);
 
-
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
             PROVIDER_DATA = new ProviderDataClass(user.getUid());
         }
-
 
         btn_viewAllVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
