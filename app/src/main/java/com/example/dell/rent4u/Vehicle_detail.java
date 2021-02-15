@@ -134,9 +134,9 @@ public class Vehicle_detail extends AppCompatActivity {
         dataMap.put("Seating", seating_cap.getText().toString().trim());
         dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.id);
         dataMap.put("NumberPlate", Number_Plate.getText().toString().trim());
-        dataMap.put("Front", "/VehicleImages/" + VehicleId + "/front");
-        dataMap.put("Side", "/VehicleImages/" + VehicleId + "/side");
-        dataMap.put("Interior", "/VehicleImages/" + VehicleId + "/interior");
+        dataMap.put("Front", "gs://rent4u-b7ee7.appspot.com/VehicleImages/VehicleImages/" + VehicleId + "/front");
+        dataMap.put("Side", "gs://rent4u-b7ee7.appspot.com/VehicleImages/VehicleImages/" + VehicleId + "/side");
+        dataMap.put("Interior", "gs://rent4u-b7ee7.appspot.com/VehicleImages/VehicleImages/" + VehicleId + "/interior");
         databaseReference.child(VehicleId).setValue(dataMap);
         startActivity(new Intent(Vehicle_detail.this, ViewVehicle.class));
         finish();
