@@ -54,9 +54,9 @@ public class ViewVehicle extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull VehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
                 Toast.makeText(ViewVehicle.this, vehicleDataClass.getRent(), Toast.LENGTH_SHORT).show();
-                Glide.with(ViewVehicle.this).load("gs://rent4u-b7ee7.appspot.com/VehicleImages/-MTW-idx2yeTZJcKp88_/front")
+                Glide.with(ViewVehicle.this).load("https://firebasestorage.googleapis.com/v0/b/rent4u-b7ee7.appspot.com/o/VehicleImages%2F-MTW6xuuzo0LwUQNOfco%2Ffront?alt=media&token=1674b468-235d-483d-80d6-704a6bb0e767")
                         .into(vehicleViewHolder.image);
-                vehicleViewHolder.vehicleName.setText(vehicleDataClass.getModelName() + "|" + vehicleDataClass.getNumberPlate());
+                vehicleViewHolder.vehicleName.setText(vehicleDataClass.getModelName() + " | " + vehicleDataClass.getNumberPlate());
                 vehicleViewHolder.seatingCapacity.setText("Seating: " + vehicleDataClass.getSeating());
                 vehicleViewHolder.rentPerKm.setText("Rent: " + vehicleDataClass.getRent() + "/km");
                 vehicleViewHolder.vehicleType.setText("Type: " + vehicleDataClass.getVehicleType());
