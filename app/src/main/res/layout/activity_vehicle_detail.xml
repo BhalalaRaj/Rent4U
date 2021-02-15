@@ -66,6 +66,36 @@
             app:layout_constraintStart_toStartOf="@+id/CityOfAvailability"
             app:layout_constraintTop_toBottomOf="@id/cityofAvailability" />
 
+        <TextView
+            android:id="@+id/tv_seating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Seating Capacity:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/Condition"
+            app:layout_constraintTop_toBottomOf="@+id/condition_vehicle" />
+
+        <TextView
+            android:id="@+id/tv_numberPlate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Number Plate:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/tv_rent"
+            app:layout_constraintTop_toBottomOf="@id/rent" />
+
+        <TextView
+            android:id="@+id/tv_rent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Rent:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/Condition"
+            app:layout_constraintTop_toBottomOf="@+id/seat" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/Front"
             style="@style/Widget.Neumorph.CardView"
@@ -76,7 +106,7 @@
             app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="@+id/pincodecard"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/rent">
+            app:layout_constraintTop_toBottomOf="@+id/numberPlate">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -306,17 +336,14 @@
             app:layout_constraintTop_toBottomOf="@+id/VehicleType"
             app:neumorph_shapeType="basin">
 
-            <EditText
+            <Spinner
                 android:id="@+id/Vehicle_type"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:inputType="text"
-                android:padding="10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:entries="@array/vehicleType"
+                android:padding="10dp" />
         </soup.neumorphism.NeumorphCardView>
+
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/modelName"
@@ -390,15 +417,6 @@
                 android:textSize="15sp" />
         </soup.neumorphism.NeumorphCardView>
 
-
-        <TextView
-            android:id="@+id/tv_seating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seating Capacity"
-            app:layout_constraintStart_toStartOf="@+id/Condition"
-            app:layout_constraintTop_toBottomOf="@+id/condition_vehicle"/>
-
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/seat"
             style="@style/CustomShapeAppearance"
@@ -423,13 +441,29 @@
                 android:textSize="15sp" />
         </soup.neumorphism.NeumorphCardView>
 
-        <TextView
-            android:id="@+id/tv_rent"
-            android:layout_width="wrap_content"
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/numberPlate"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rent"
-            app:layout_constraintStart_toStartOf="@+id/Condition"
-            app:layout_constraintTop_toBottomOf="@+id/seat"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_numberPlate"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/edt_numberPlate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/rent"
@@ -454,7 +488,6 @@
                 android:paddingEnd="20dp"
                 android:textSize="15sp" />
         </soup.neumorphism.NeumorphCardView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

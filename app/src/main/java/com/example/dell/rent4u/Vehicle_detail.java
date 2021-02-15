@@ -11,9 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,10 +33,11 @@ import java.util.Map;
 
 public class Vehicle_detail extends AppCompatActivity {
 
-    EditText Vehicle_type, Model_name, city_ava, condition_veh, seating_cap, rent;
+    EditText  Model_name, city_ava, condition_veh, seating_cap, rent, Number_Plate;
     Button Front_upload, Interior_upload, Side_upload, submit;
     ImageView Front_img, Interior_img, Side_img;
 
+    Spinner Vehicle_type;
     String VehicleId = "";
 
     FirebaseStorage firebaseStorage;
@@ -61,6 +64,7 @@ public class Vehicle_detail extends AppCompatActivity {
         condition_veh = findViewById(R.id.condition_veh);
         seating_cap = findViewById(R.id.edt_seatingCapacity);
         rent = findViewById(R.id.edt_rent);
+        Number_Plate = findViewById(R.id.edt_numberPlate);
 
         Front_upload = findViewById(R.id.Front_upload);
         Interior_upload = findViewById(R.id.Interior_upload);
@@ -122,13 +126,14 @@ public class Vehicle_detail extends AppCompatActivity {
     private void uploadVehicleData() {
 
         dataMap = new HashMap<>();
-        dataMap.put("VehicleType", Vehicle_type.getText().toString().trim());
+        dataMap.put("VehicleType", Vehicle_type.getSelectedItem().toString().trim());
         dataMap.put("ModelName", Model_name.getText().toString().trim());
         dataMap.put("City", city_ava.getText().toString().trim());
         dataMap.put("Condition", condition_veh.getText().toString().trim());
         dataMap.put("Rent", rent.getText().toString().trim());
         dataMap.put("Seating", seating_cap.getText().toString().trim());
         dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.id);
+        dataMap.put("NumberPlate", Number_Plate.getText().toString().trim());
         dataMap.put("Front", "/VehicleImages/" + VehicleId + "/front");
         dataMap.put("Side", "/VehicleImages/" + VehicleId + "/side");
         dataMap.put("Interior", "/VehicleImages/" + VehicleId + "/interior");

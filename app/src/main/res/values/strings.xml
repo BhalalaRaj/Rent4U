@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Rent4U</string>
+
+
+    <string-array name="vehicleType">
+        <item>Car</item>
+        <item>Bus</item>
+        <item>Bike</item>
+        <item>Truck</item>
+        <item>MiniBus</item>
+        <item>MiniTruck</item>
+    </string-array>
 </resources>
