@@ -2,17 +2,17 @@ package com.example.dell.rent4u;
 
 class VehicleDataClass {
 
-    private String Front;
-    private String Side;
-    private String Interior;
-    private String Rent;
-    private String Condition;
-    private String Owner;
-    private String Seating;
-    private String OnRentStatus;
     private String City;
+    private String Condition;
+    private String Front;
+    private String Interior;
     private String ModelName;
     private String NumberPlate;
+    private String OnRentStatus;
+    private String Owner;
+    private String Rent;
+    private String Seating;
+    private String Side;
     private String VehicleType;
 
     public String getVehicleType() {
@@ -66,22 +66,23 @@ class VehicleDataClass {
         return NumberPlate;
     }
 
-    public VehicleDataClass(String front, String side,
-                            String interior, String rent,
-                            String condition, String owner,
-                            String seating, String onRentStatus,
-                            String city, String modelName, String numberPlate, String vehicleType) {
-        Front = front;
-        Side = side;
-        Interior = interior;
-        Rent = rent;
-        Condition = condition;
-        Owner = owner;
-        Seating = seating;
-        this.OnRentStatus = onRentStatus;
+    public VehicleDataClass(String city, String condition,
+                            String front, String interior,
+                            String modelName, String numberPlate,
+                            String onRentStatus, String owner,
+                            String rent, String seating,
+                            String side, String vehicleType) {
         City = city;
+        Condition = condition;
+        Front = front;
+        Interior = interior;
         ModelName = modelName;
         NumberPlate = numberPlate;
-        this.VehicleType = vehicleType;
+        OnRentStatus = onRentStatus;
+        Owner = owner;
+        Rent = rent;
+        Seating = seating;
+        Side = side;
+        VehicleType = vehicleType;
     }
 }

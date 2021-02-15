@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -52,7 +53,9 @@ public class ViewVehicle extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull VehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
-                Glide.with(ViewVehicle.this).load(vehicleDataClass.getFront()).into(vehicleViewHolder.image);
+                Toast.makeText(ViewVehicle.this, vehicleDataClass.getRent(), Toast.LENGTH_SHORT).show();
+                Glide.with(ViewVehicle.this).load("gs://rent4u-b7ee7.appspot.com/VehicleImages/-MTW-idx2yeTZJcKp88_/front")
+                        .into(vehicleViewHolder.image);
                 vehicleViewHolder.vehicleName.setText(vehicleDataClass.getModelName() + "|" + vehicleDataClass.getNumberPlate());
                 vehicleViewHolder.seatingCapacity.setText("Seating: " + vehicleDataClass.getSeating());
                 vehicleViewHolder.rentPerKm.setText("Rent: " + vehicleDataClass.getRent() + "/km");
@@ -60,6 +63,7 @@ public class ViewVehicle extends AppCompatActivity {
             }
         };
         adapter.notifyDataSetChanged();
+        adapter.startListening();
         rv_vehicleList.setAdapter(adapter);
 
         fab_addVehicle.setOnClickListener(new View.OnClickListener() {
