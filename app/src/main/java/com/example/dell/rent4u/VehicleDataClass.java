@@ -2,88 +2,86 @@ package com.example.dell.rent4u;
 
 class VehicleDataClass {
 
-    String frontImage;
-    String sideImage;
-    String interiorImage;
-    String rentPrice;
-    String condition;
-    String owner;
-    String seatingCapacity;
-    String onRentStatus;
-    String city;
-    String vehicleName;
-    String numberPlate;
+    private String Front;
+    private String Side;
+    private String Interior;
+    private String Rent;
+    private String Condition;
+    private String Owner;
+    private String Seating;
+    private String OnRentStatus;
+    private String City;
+    private String ModelName;
+    private String NumberPlate;
+    private String VehicleType;
 
     public String getVehicleType() {
-        return vehicleType;
+        return VehicleType;
     }
-
-    String vehicleType;
 
     public VehicleDataClass() {
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getFront() {
+        return Front;
     }
 
-    public String getNumberPlate() {
-        return numberPlate;
+    public String getSide() {
+        return Side;
     }
 
-    public VehicleDataClass(String frontImage, String sideImage,
-                            String interiorImage, String rentPrice,
-                            String condition, String owner,
-                            String seatingCapacity, String onRentStatus,
-                            String city, String vehicleName,
-                            String numberPlate, String vehicleType) {
-        this.frontImage = frontImage;
-        this.sideImage = sideImage;
-        this.interiorImage = interiorImage;
-        this.rentPrice = rentPrice;
-        this.condition = condition;
-        this.owner = owner;
-        this.seatingCapacity = seatingCapacity;
-        this.onRentStatus = onRentStatus;
-        this.city = city;
-        this.vehicleName = vehicleName;
-        this.numberPlate = numberPlate;
-        this.vehicleType = vehicleType;
+    public String getInterior() {
+        return Interior;
     }
 
-    public String getFrontImage() {
-        return frontImage;
-    }
-
-    public String getSideImage() {
-        return sideImage;
-    }
-
-    public String getInteriorImage() {
-        return interiorImage;
-    }
-
-    public String getRentPrice() {
-        return rentPrice;
+    public String getRent() {
+        return Rent;
     }
 
     public String getCondition() {
-        return condition;
+        return Condition;
     }
 
     public String getOwner() {
-        return owner;
+        return Owner;
     }
 
-    public String getSeatingCapacity() {
-        return seatingCapacity;
+    public String getSeating() {
+        return Seating;
     }
 
     public String getOnRentStatus() {
-        return onRentStatus;
+        return OnRentStatus;
     }
 
     public String getCity() {
-        return city;
+        return City;
+    }
+
+    public String getModelName() {
+        return ModelName;
+    }
+
+    public String getNumberPlate() {
+        return NumberPlate;
+    }
+
+    public VehicleDataClass(String front, String side,
+                            String interior, String rent,
+                            String condition, String owner,
+                            String seating, String onRentStatus,
+                            String city, String modelName, String numberPlate, String vehicleType) {
+        Front = front;
+        Side = side;
+        Interior = interior;
+        Rent = rent;
+        Condition = condition;
+        Owner = owner;
+        Seating = seating;
+        this.OnRentStatus = onRentStatus;
+        City = city;
+        ModelName = modelName;
+        NumberPlate = numberPlate;
+        this.VehicleType = vehicleType;
     }
 }
