@@ -37,8 +37,10 @@ public class ViewVehicle extends AppCompatActivity {
         rv_vehicleList.setLayoutManager(new LinearLayoutManager(this));
 
 
-        final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference().child("Vehicles");
-        FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>().build();
+        final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
+        FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
+                .setQuery(vehicleList.child("Vehicles"), VehicleDataClass.class)
+                .build();
 
         FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder> adapter = new FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder>(options) {
             @NonNull
@@ -57,7 +59,7 @@ public class ViewVehicle extends AppCompatActivity {
                 vehicleViewHolder.vehicleType.setText("Type: " + vehicleDataClass.getVehicleType());
             }
         };
-
+        adapter.notifyDataSetChanged();
         rv_vehicleList.setAdapter(adapter);
 
         fab_addVehicle.setOnClickListener(new View.OnClickListener() {

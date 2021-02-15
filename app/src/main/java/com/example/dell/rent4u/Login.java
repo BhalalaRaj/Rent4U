@@ -47,11 +47,11 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(email.getText().toString().trim().equals("") && password.getText().toString().trim().equals(""))) {
-                    startLogin(email.getText().toString().trim(), password.getText().toString().trim());
-                } else {
-                    Toast.makeText(Login.this, "Empty Fields", Toast.LENGTH_SHORT).show();
-                }
+                startLogin(email.getText().toString().trim(), password.getText().toString().trim());
+//                if (!(email.getText().toString().trim().equals("") && password.getText().toString().trim().equals(""))) {
+//                } else {
+//                    Toast.makeText(Login.this, "Empty Fields", Toast.LENGTH_SHORT).show();
+//                }
             }
 
         });
@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void startLogin(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword("raj@gmail.com", "123456").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
