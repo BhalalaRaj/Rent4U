@@ -42,7 +42,7 @@ public class UserRegistration extends AppCompatActivity {
         usercity = findViewById(R.id.usercity);
         usercity_pincode = findViewById(R.id.usercity_pincode);
 
-        submit = findViewById(R.id.submit);
+        submit = findViewById(R.id.BookNow);
         mAuth = FirebaseAuth.getInstance();
 
         submit.setOnClickListener(new View.OnClickListener() {

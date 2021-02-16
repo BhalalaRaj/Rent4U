@@ -60,7 +60,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
-    
+
     implementation "com.zlc.glide:webpdecoder:1.3.4.8.0"
 
 

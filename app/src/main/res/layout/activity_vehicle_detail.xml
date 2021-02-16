@@ -310,7 +310,7 @@
         </androidx.cardview.widget.CardView>
 
         <soup.neumorphism.NeumorphButton
-            android:id="@+id/submit"
+            android:id="@+id/BookNow"
             style="@style/Widget.Neumorph.Button"
             android:layout_width="169dp"
             android:layout_height="wrap_content"

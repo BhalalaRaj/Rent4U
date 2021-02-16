@@ -256,7 +256,7 @@
         </soup.neumorphism.NeumorphCardView>
 
         <soup.neumorphism.NeumorphButton
-            android:id="@+id/submit"
+            android:id="@+id/BookNow"
             style="@style/Widget.Neumorph.Button"
             android:layout_width="147dp"
             android:layout_height="wrap_content"

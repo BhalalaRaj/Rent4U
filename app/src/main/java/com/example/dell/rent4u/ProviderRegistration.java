@@ -58,7 +58,7 @@ public class ProviderRegistration extends AppCompatActivity {
 
         adharupload = findViewById(R.id.Front_upload);
         licenseupload = findViewById(R.id.licenseupload);
-        Submit = findViewById(R.id.submit);
+        Submit = findViewById(R.id.BookNow);
         licenseimage = findViewById(R.id.licenseimage);
         adharimage = findViewById(R.id.Front_img);
 

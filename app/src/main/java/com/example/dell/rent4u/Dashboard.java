@@ -1,5 +1,6 @@
 package com.example.dell.rent4u;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,6 +18,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     FirebaseUser userId;
+    public int counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.truck : {
+
                 getTruck();
                 break;
             }
@@ -60,6 +63,19 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 getCar();
                 break;
             }
+            case R.id.bike: {
+                getbike();
+                break;
+            }
+
+            case R.id.minibus: {
+                getminibus();
+                break;
+            }
+            case R.id.minitruck: {
+                getminitruck();
+                break;
+            }
 
             default: {
                 onClick(v);
@@ -68,12 +84,27 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void getCar() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
+    }
+
+    private void getbike() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
     }
 
     private void getBus() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
+    }
+
+    private void getminibus() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
+    }
+
+    private void getminitruck() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
     }
 
     private void getTruck() {
+        startActivity(new Intent(Dashboard.this, DisplayItem.class));
 
     }
 }

@@ -69,7 +69,7 @@ public class Vehicle_detail extends AppCompatActivity {
         Front_upload = findViewById(R.id.Front_upload);
         Interior_upload = findViewById(R.id.Interior_upload);
         Side_upload = findViewById(R.id.Side_upload);
-        submit = findViewById(R.id.submit);
+        submit = findViewById(R.id.BookNow);
 
         Front_img = findViewById(R.id.Front_img);
         Interior_img = findViewById(R.id.Interior_img);

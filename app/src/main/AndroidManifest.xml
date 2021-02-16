@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ViewVehicle"/>
+        <activity android:name=".DisplayItem"></activity>
+        <activity android:name=".ViewVehicle" />
         <activity android:name=".Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".Vehicle_detail"/>
+        <activity android:name=".Vehicle_detail" />
         <activity android:name=".ProviderDashboard" />
         <activity android:name=".UserRegistration" />
         <activity android:name=".ProviderRegistration" />
@@ -30,6 +31,5 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
-
 
 </manifest>

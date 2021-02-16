@@ -37,17 +37,6 @@
         app:layout_constraintTop_toBottomOf="@+id/register" />
 
     <TextView
-        android:id="@+id/Mname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/register" />
-
-    <TextView
         android:id="@+id/img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,68 +89,48 @@
         android:layout_marginTop="28dp"
         android:text="Rent/Km :"
         android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/seating"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/abc" />
 
     <TextView
-        android:id="@+id/RentPerKm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:id="@+id/seating"
+        android:layout_width="121dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:text="Seating Capacity :"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tvRent"
         app:layout_constraintTop_toBottomOf="@+id/abc" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="121dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:text="Seating Capacity :"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/RentPerKm"
-        app:layout_constraintTop_toBottomOf="@+id/abc" />
-
-    <TextView
-        android:id="@+id/seatingCapacity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/abc" />
-
     <soup.neumorphism.NeumorphButton
-        android:id="@+id/submit"
+        android:id="@+id/BookNow"
         style="@style/Widget.Neumorph.Button"
         android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="164dp"
         android:text="Book Now"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/abc"
         app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/DateFrom"
         android:layout_width="163dp"
         android:layout_height="49dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDate2"
+        app:layout_constraintEnd_toStartOf="@+id/DateTo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
     <EditText
-        android:id="@+id/editTextDate2"
+        android:id="@+id/DateTo"
         android:layout_width="163dp"
         android:layout_height="49dp"
         android:layout_marginTop="8dp"
@@ -191,6 +160,6 @@
         android:text="To"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toBottomOf="@+id/seating" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
