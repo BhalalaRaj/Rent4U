@@ -107,3 +107,5 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
         rentPerKm = itemView.findViewById(R.id.row_vehicleRent);
     }
 }
+//
+//https://medium.com/@egemenhamutcu/displaying-images-from-firebase-storage-using-glide-for-kotlin-projects-3e4950f6c103
