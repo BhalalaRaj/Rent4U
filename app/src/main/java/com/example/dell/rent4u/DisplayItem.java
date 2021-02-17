@@ -26,6 +26,10 @@ public class DisplayItem extends AppCompatActivity {
 
     RecyclerView rv_DisplayList;
 
+    FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder> adapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,7 @@ public class DisplayItem extends AppCompatActivity {
                 .setQuery(vehicleList.child("Vehicles").orderByChild("VehicleType").equalTo(vehicleType), VehicleDataClass.class)
                 .build();
 
-        FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder> adapter = new FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder>(options) {
             @NonNull
             @Override
             public UserVehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,7 +72,14 @@ public class DisplayItem extends AppCompatActivity {
         };
         adapter.notifyDataSetChanged();
         adapter.startListening();
+
         rv_DisplayList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter.stopListening();
     }
 }
 

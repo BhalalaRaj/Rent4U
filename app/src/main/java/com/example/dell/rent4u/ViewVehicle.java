@@ -31,6 +31,14 @@ public class ViewVehicle extends AppCompatActivity {
 
     RecyclerView rv_vehicleList;
 
+    FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder> adapter;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter.stopListening();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +55,7 @@ public class ViewVehicle extends AppCompatActivity {
                 .setQuery(vehicleList.child("Vehicles"), VehicleDataClass.class)
                 .build();
 
-        FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder> adapter = new FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder>(options) {
             @NonNull
             @Override
             public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
