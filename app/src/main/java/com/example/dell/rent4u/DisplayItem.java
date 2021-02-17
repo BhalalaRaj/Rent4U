@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,22 +34,23 @@ public class DisplayItem extends AppCompatActivity {
 
         rv_DisplayList.setLayoutManager(new LinearLayoutManager(this));
 
+        String vehicleType = getIntent().getStringExtra("VehicleType");
 
         final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
         FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
-                .setQuery(vehicleList.child("Vehicles"), VehicleDataClass.class)
+                .setQuery(vehicleList.child("Vehicles").orderByChild("VehicleType").equalTo(vehicleType), VehicleDataClass.class)
                 .build();
 
-        FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder> adapter = new FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder>(options) {
+        FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder> adapter = new FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder>(options) {
             @NonNull
             @Override
-            public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public UserVehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_row, parent, false);
-                return new VehicleViewHolder(view);
+                return new UserVehicleViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull VehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
+            protected void onBindViewHolder(@NonNull UserVehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
                 makeText(DisplayItem.this, vehicleDataClass.getRent(), LENGTH_SHORT).show();
 
                 StorageReference mStorageRef = FirebaseStorage.getInstance().
@@ -71,12 +71,13 @@ public class DisplayItem extends AppCompatActivity {
         rv_DisplayList.setAdapter(adapter);
     }
 }
-class DisplayViewHolder extends RecyclerView.ViewHolder {
+
+class UserVehicleViewHolder extends RecyclerView.ViewHolder {
     ImageView image;
 
     TextView vehicleName, seatingCapacity, vehicleType, rentPerKm;
 
-    public DisplayViewHolder(@NonNull View itemView) {
+    public UserVehicleViewHolder(@NonNull View itemView) {
         super(itemView);
         image = itemView.findViewById(R.id.row_vehicle_image);
         vehicleName = itemView.findViewById(R.id.row_vehicleName);
