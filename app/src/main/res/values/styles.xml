@@ -9,7 +9,7 @@
     </style>
 
     <style name="CustomShapeAppearance">
-        <item name="neumorph_cornerFamily"> rounded</item>
+        <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">30dp</item>
 
         <!-- Or if wants different radii depending on the corner. -->

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".booking">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/register"
@@ -105,18 +109,6 @@
         app:layout_constraintStart_toEndOf="@+id/tvRent"
         app:layout_constraintTop_toBottomOf="@+id/abc" />
 
-    <soup.neumorphism.NeumorphButton
-        android:id="@+id/BookNow"
-        style="@style/Widget.Neumorph.Button"
-        android:layout_width="147dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="Book Now"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abc"
-        app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
     <EditText
         android:id="@+id/DateFrom"
@@ -162,4 +154,95 @@
         app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toBottomOf="@+id/seating" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/srs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Enter Source :"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/DateFrom"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/DateFrom"
+            app:layout_constraintTop_toBottomOf="@+id/DateFrom" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/Src"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="243dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.212"
+            app:layout_constraintStart_toEndOf="@+id/srs"
+            app:layout_constraintTop_toBottomOf="@+id/DateTo"
+            app:neumorph_shapeType="basin">
+
+        <EditText
+            android:id="@+id/Source"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:inputType="text"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="15sp"  />
+        </soup.neumorphism.NeumorphCardView>
+
+
+        <TextView
+            android:id="@+id/dst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Enter\nDestination :"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/srs"
+            app:layout_constraintHorizontal_bias="0.111"
+            app:layout_constraintStart_toStartOf="@+id/srs"
+            app:layout_constraintTop_toBottomOf="@+id/srs" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/Dst"
+            style="@style/CustomShapeAppearance"
+            android:layout_width="243dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.327"
+            app:layout_constraintStart_toEndOf="@+id/dst"
+            app:layout_constraintTop_toBottomOf="@+id/Src"
+            app:neumorph_shapeType="basin">
+
+            <EditText
+                android:id="@+id/Destination"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/BookNow"
+            style="@style/Widget.Neumorph.Button"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Book Now"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Dst"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
