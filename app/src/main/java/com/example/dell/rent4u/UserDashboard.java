@@ -1,7 +1,10 @@
 package com.example.dell.rent4u;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import soup.neumorphism.NeumorphImageButton;
 
-public class Dashboard extends AppCompatActivity implements View.OnClickListener {
+public class UserDashboard extends AppCompatActivity implements View.OnClickListener {
 
     NeumorphImageButton btn_car, btn_bike, btn_truck, btn_miniTruck, btn_bus, btn_miniBus;
     FirebaseAuth mAuth;
@@ -25,6 +28,34 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     DatabaseReference mDatabase;
     FirebaseUser userId;
     public int counter = 0;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_logout: {
+                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.shared_pref_name), 0);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.email), null);
+                editor.putString(getString(R.string.password), null);
+                editor.apply();
+                mAuth.signOut();
+                startActivity(new Intent(UserDashboard.this, Login.class));
+                finish();
+                break;
+            }
+            default: {
+                onOptionsItemSelected(item);
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dashboard_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +99,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.truck: {
-
                 getTruck();
                 break;
             }
@@ -103,33 +133,33 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void getCar() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","Car"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "Car"));
     }
 
     private void getbike() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","Bike"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "Bike"));
     }
 
     private void getBus() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","Bus"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "Bus"));
     }
 
     private void getminibus() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","MiniBus"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "MiniBus"));
     }
 
     private void getminitruck() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","MiniTruck"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "MiniTruck"));
     }
 
     private void getTruck() {
-        startActivity(new Intent(Dashboard.this, DisplayItem.class)
-                .putExtra("VehicleType","Truck"));
+        startActivity(new Intent(UserDashboard.this, DisplayItem.class)
+                .putExtra("VehicleType", "Truck"));
 
     }
 }

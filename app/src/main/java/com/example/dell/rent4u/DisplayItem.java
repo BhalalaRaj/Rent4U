@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,8 +29,6 @@ public class DisplayItem extends AppCompatActivity {
     RecyclerView rv_DisplayList;
 
     FirebaseRecyclerAdapter<VehicleDataClass, UserVehicleViewHolder> adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

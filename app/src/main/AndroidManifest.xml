@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Dashboard" />
+        <activity android:name=".UserDashboard" />
         <activity android:name=".Vehicle_detail" />
         <activity android:name=".ProviderDashboard" />
         <activity android:name=".UserRegistration" />
