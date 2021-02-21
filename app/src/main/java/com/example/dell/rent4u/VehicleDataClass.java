@@ -16,6 +16,7 @@ class VehicleDataClass implements Parcelable {
     private String Rent;
     private String Seating;
     private String Side;
+    private String VehicleId;
     private String VehicleType;
 
     protected VehicleDataClass(Parcel in) {
@@ -30,6 +31,7 @@ class VehicleDataClass implements Parcelable {
         Rent = in.readString();
         Seating = in.readString();
         Side = in.readString();
+        VehicleId = in.readString();
         VehicleType = in.readString();
     }
 
@@ -101,7 +103,8 @@ class VehicleDataClass implements Parcelable {
                             String modelName, String numberPlate,
                             String onRentStatus, String owner,
                             String rent, String seating,
-                            String side, String vehicleType) {
+                            String side, String vehicleType,
+                            String vehicleId) {
         City = city;
         Condition = condition;
         Front = front;
@@ -113,7 +116,12 @@ class VehicleDataClass implements Parcelable {
         Rent = rent;
         Seating = seating;
         Side = side;
+        VehicleId = vehicleId;
         VehicleType = vehicleType;
+    }
+
+    public String getVehicleId() {
+        return VehicleId;
     }
 
     @Override
@@ -135,6 +143,7 @@ class VehicleDataClass implements Parcelable {
         dest.writeString(Rent);
         dest.writeString(Seating);
         dest.writeString(Side);
+        dest.writeString(VehicleId);
         dest.writeString(VehicleType);
     }
 }

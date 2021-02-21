@@ -58,7 +58,7 @@ public class VehicleBooking extends AppCompatActivity {
         imageUrl.add(vehicleDataClass.getSide());
 
         SliderView sliderView = findViewById(R.id.imageSlider);
-        sliderView.setSliderAdapter(new SliderAdapterExample(this, imageUrl));
+        sliderView.setSliderAdapter(new SliderAdapter(this, imageUrl));
 
         name.setText("Model Name: " + vehicleDataClass.getModelName());
         tvRent.setText("Rent: " + vehicleDataClass.getRent() + " / km");

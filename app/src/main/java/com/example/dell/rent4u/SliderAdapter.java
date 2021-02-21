@@ -13,13 +13,13 @@ import com.smarteist.autoimageslider.SliderViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SliderAdapterExample extends
-        SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
+public class SliderAdapter extends
+        SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
 
     private Context context;
     private List<String> mSliderItems = new ArrayList<>();
 
-    public SliderAdapterExample(Context context, List<String> sliderItems) {
+    public SliderAdapter(Context context, List<String> sliderItems) {
         this.context = context;
         this.mSliderItems = sliderItems;
         notifyDataSetChanged();
