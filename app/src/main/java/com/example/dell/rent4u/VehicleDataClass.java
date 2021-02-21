@@ -1,6 +1,9 @@
 package com.example.dell.rent4u;
 
-class VehicleDataClass {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+class VehicleDataClass implements Parcelable {
 
     private String City;
     private String Condition;
@@ -14,6 +17,33 @@ class VehicleDataClass {
     private String Seating;
     private String Side;
     private String VehicleType;
+
+    protected VehicleDataClass(Parcel in) {
+        City = in.readString();
+        Condition = in.readString();
+        Front = in.readString();
+        Interior = in.readString();
+        ModelName = in.readString();
+        NumberPlate = in.readString();
+        OnRentStatus = in.readString();
+        Owner = in.readString();
+        Rent = in.readString();
+        Seating = in.readString();
+        Side = in.readString();
+        VehicleType = in.readString();
+    }
+
+    public static final Creator<VehicleDataClass> CREATOR = new Creator<VehicleDataClass>() {
+        @Override
+        public VehicleDataClass createFromParcel(Parcel in) {
+            return new VehicleDataClass(in);
+        }
+
+        @Override
+        public VehicleDataClass[] newArray(int size) {
+            return new VehicleDataClass[size];
+        }
+    };
 
     public String getVehicleType() {
         return VehicleType;
@@ -84,5 +114,27 @@ class VehicleDataClass {
         Seating = seating;
         Side = side;
         VehicleType = vehicleType;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(City);
+        dest.writeString(Condition);
+        dest.writeString(Front);
+        dest.writeString(Interior);
+        dest.writeString(ModelName);
+        dest.writeString(NumberPlate);
+        dest.writeString(OnRentStatus);
+        dest.writeString(Owner);
+        dest.writeString(Rent);
+        dest.writeString(Seating);
+        dest.writeString(Side);
+        dest.writeString(VehicleType);
     }
 }

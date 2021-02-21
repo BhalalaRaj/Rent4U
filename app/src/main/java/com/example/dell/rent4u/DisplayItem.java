@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +43,7 @@ public class DisplayItem extends AppCompatActivity {
         String vehicleType = getIntent().getStringExtra("VehicleType");
 
         final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
+
         FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
                 .setQuery(vehicleList.child("Vehicles").orderByChild("VehicleType").equalTo(vehicleType), VehicleDataClass.class)
                 .build();
@@ -63,6 +66,16 @@ public class DisplayItem extends AppCompatActivity {
                 GlideApp.with(DisplayItem.this).load(mStorageRef)
                         .into(vehicleViewHolder.image);
 
+                vehicleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent itemIntent = new Intent(DisplayItem.this, VehicleBooking.class);
+                        Bundle itemBundle = new Bundle();
+                        itemBundle.putParcelable("VehicleDetail", (Parcelable) vehicleDataClass);
+                        itemIntent.putExtra("VehicleDetail", itemBundle);
+                        startActivity(itemIntent);
+                    }
+                });
 
                 vehicleViewHolder.vehicleName.setText(vehicleDataClass.getModelName() + " | " + vehicleDataClass.getNumberPlate());
                 vehicleViewHolder.seatingCapacity.setText("Seating: " + vehicleDataClass.getSeating());
