@@ -71,7 +71,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Date from:"
+            android:text="\nDate from:"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -145,29 +145,32 @@
             app:sliderIndicatorSelectedColor="#FFF"
             app:sliderIndicatorUnselectedColor="#5A5A5A" />
 
-        <soup.neumorphism.NeumorphCardView
+        <!--<soup.neumorphism.NeumorphCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/tv_dateFrom"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
             app:layout_constraintTop_toTopOf="@+id/tv_dateFrom"
-            app:neumorph_shapeType="basin">
+            app:neumorph_shapeType="basin">-->
 
-            <EditText
-                android:id="@+id/DateFrom"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:inputType="date"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp" />
+        <!-- </soup.neumorphism.NeumorphCardView>-->
 
-        </soup.neumorphism.NeumorphCardView>
+        <EditText
+            android:id="@+id/DateFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
+            app:layout_constraintTop_toTopOf="@+id/tv_dateFrom" />
 
-        <soup.neumorphism.NeumorphCardView
+        <!--<soup.neumorphism.NeumorphCardView
             android:id="@+id/neumorphCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,28 +178,31 @@
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
             app:layout_constraintTop_toTopOf="@+id/textView11"
-            app:neumorph_shapeType="basin">
+            app:neumorph_shapeType="basin">-->
 
             <EditText
                 android:id="@+id/DateTo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:background="@null"
-                android:inputType="date"
                 android:paddingTop="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView11"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
+                app:layout_constraintTop_toTopOf="@+id/textView11"
                 android:paddingBottom="10dp"
                 android:paddingEnd="20dp"
                 android:paddingStart="20dp"/>
 
-        </soup.neumorphism.NeumorphCardView>
+        <!--</soup.neumorphism.NeumorphCardView>-->
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/neumorphCardView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintEnd_toEndOf="@+id/neumorphCardView"
-            app:layout_constraintStart_toStartOf="@+id/neumorphCardView"
+            app:layout_constraintEnd_toEndOf="@+id/DateTo"
+            app:layout_constraintStart_toStartOf="@+id/DateTo"
             app:layout_constraintTop_toTopOf="@+id/textView12"
             app:neumorph_shapeType="basin">
 
