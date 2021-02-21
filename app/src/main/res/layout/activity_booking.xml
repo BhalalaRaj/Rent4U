@@ -10,16 +10,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <EditText
+            android:id="@+id/DateFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
+            app:layout_constraintTop_toTopOf="@+id/tv_dateFrom" />
+
+
+        <EditText
+            android:id="@+id/DateTo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
+
         <TextView
             android:id="@+id/register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Book Your Ride Now"
             android:textSize="25sp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/imageSlider"
             app:layout_constraintStart_toStartOf="@id/imageSlider"
             app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
-
 
         <TextView
             android:id="@+id/name"
@@ -94,6 +121,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
+
         <TextView
             android:id="@+id/tv_owner_name"
             android:layout_width="0dp"
@@ -126,6 +154,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
@@ -145,56 +174,20 @@
             app:sliderIndicatorSelectedColor="#FFF"
             app:sliderIndicatorUnselectedColor="#5A5A5A" />
 
-        <!--<soup.neumorphism.NeumorphCardView
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/BookNow"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_dateFrom"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
-            app:layout_constraintTop_toTopOf="@+id/tv_dateFrom"
-            app:neumorph_shapeType="basin">-->
-
-        <!-- </soup.neumorphism.NeumorphCardView>-->
-
-        <EditText
-            android:id="@+id/DateFrom"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.245"
-            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
-            app:layout_constraintTop_toTopOf="@+id/tv_dateFrom" />
-
-        <!--<soup.neumorphism.NeumorphCardView
-            android:id="@+id/neumorphCardView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
-            app:layout_constraintTop_toTopOf="@+id/textView11"
-            app:neumorph_shapeType="basin">-->
-
-            <EditText
-                android:id="@+id/DateTo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:paddingTop="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toEndOf="@+id/tv_dateFrom"
-                app:layout_constraintTop_toTopOf="@+id/textView11"
-                android:paddingBottom="10dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp"/>
-
-        <!--</soup.neumorphism.NeumorphCardView>-->
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Book Now"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/cv_dest"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@id/cv_dest"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/neumorphCardView2"
@@ -212,10 +205,10 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:inputType="date"
+                android:paddingStart="20dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:paddingEnd="20dp"
-                android:paddingStart="20dp"/>
+                android:paddingBottom="10dp" />
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -236,27 +229,12 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:inputType="date"
+                android:paddingStart="20dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:paddingEnd="20dp"
-                android:paddingStart="20dp"/>
+                android:paddingBottom="10dp" />
 
         </soup.neumorphism.NeumorphCardView>
-
-        <soup.neumorphism.NeumorphButton
-            android:id="@+id/BookNow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Book Now"
-            android:textSize="16sp"
-            style="@style/Widget.Neumorph.Button"
-            app:layout_constraintEnd_toEndOf="@+id/cv_dest"
-            app:layout_constraintStart_toStartOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@id/cv_dest"
-            app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
