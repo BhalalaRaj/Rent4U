@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class VehicleBooking extends AppCompatActivity {
 
-    TextView name, tvRent, seating, tv_owner_name, tv_company_name;
+    TextView name, tvRent, seating, tv_owner_name, tv_company_name,tv_Condition;
     EditText DateFrom, DateTo, Source, Destination;
     DatePickerDialog datepicker;
     Button BookNow;
@@ -41,6 +41,7 @@ public class VehicleBooking extends AppCompatActivity {
         seating = findViewById(R.id.seating);
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_owner_name = findViewById(R.id.tv_owner_name);
+        tv_Condition = findViewById(R.id.tv_Condition);
 
         DateFrom = findViewById(R.id.DateFrom);
         DateTo = findViewById(R.id.DateTo);
@@ -63,6 +64,7 @@ public class VehicleBooking extends AppCompatActivity {
         name.setText("Model Name: " + vehicleDataClass.getModelName());
         tvRent.setText("Rent: " + vehicleDataClass.getRent() + " / km");
         seating.setText("Seating: " + vehicleDataClass.getSeating());
+        tv_Condition.setText("Condtion: " + vehicleDataClass.getCondition());
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Rental_Provider").child(vehicleDataClass.getOwner());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
