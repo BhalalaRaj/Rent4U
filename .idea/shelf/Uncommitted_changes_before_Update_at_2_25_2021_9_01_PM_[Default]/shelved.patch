@@ -1,0 +1,41 @@
+Index: app/src/main/java/com/example/dell/rent4u/VehicleBooking.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.dell.rent4u;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.DatePicker;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.smarteist.autoimageslider.SliderView;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\n\r\npublic class VehicleBooking extends AppCompatActivity {\r\n\r\n    TextView name, tvRent, seating, tv_owner_name, tv_company_name,tv_Condition;\r\n    EditText DateFrom, DateTo, Source, Destination;\r\n    DatePickerDialog datepicker;\r\n    Button BookNow;\r\n\r\n    DatabaseReference databaseReference;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_booking);\r\n        name = findViewById(R.id.name);\r\n        tvRent = findViewById(R.id.tvRent);\r\n        seating = findViewById(R.id.seating);\r\n        tv_company_name = findViewById(R.id.tv_company_name);\r\n        tv_owner_name = findViewById(R.id.tv_owner_name);\r\n        tv_Condition = findViewById(R.id.tv_Condition);\r\n\r\n        DateFrom = findViewById(R.id.DateFrom);\r\n        DateTo = findViewById(R.id.DateTo);\r\n        Source = findViewById(R.id.Source);\r\n        Destination = findViewById(R.id.Destination);\r\n        BookNow = findViewById(R.id.BookNow);\r\n\r\n        Intent intent = getIntent();\r\n\r\n        Bundle itemBundle = intent.getExtras().getParcelable(\"VehicleDetail\");\r\n        VehicleDataClass vehicleDataClass = itemBundle.getParcelable(\"VehicleDetail\");\r\n        ArrayList<String> imageUrl = new ArrayList<>();\r\n        imageUrl.add(vehicleDataClass.getFront());\r\n        imageUrl.add(vehicleDataClass.getInterior());\r\n        imageUrl.add(vehicleDataClass.getSide());\r\n\r\n        SliderView sliderView = findViewById(R.id.imageSlider);\r\n        sliderView.setSliderAdapter(new SliderAdapter(this, imageUrl));\r\n\r\n        name.setText(\"Model Name: \" + vehicleDataClass.getModelName());\r\n        tvRent.setText(\"Rent: \" + vehicleDataClass.getRent() + \" / km\");\r\n        seating.setText(\"Seating: \" + vehicleDataClass.getSeating());\r\n        tv_Condition.setText(\"Condtion: \" + vehicleDataClass.getCondition());\r\n\r\n        databaseReference = FirebaseDatabase.getInstance().getReference().child(\"Rental_Provider\").child(vehicleDataClass.getOwner());\r\n        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                tv_owner_name.setText(\"Owner Name: \" + snapshot.child(\"Owner_Name\").getValue());\r\n                tv_company_name.setText(\"Company Name: \" + snapshot.child(\"Company_Name\").getValue());\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n            }\r\n        });\r\n\r\n\r\n        DateFrom.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                final Calendar cldr = Calendar.getInstance();\r\n                int day = cldr.get(Calendar.DAY_OF_MONTH);\r\n                int month = cldr.get(Calendar.MONTH);\r\n                int year = cldr.get(Calendar.YEAR);\r\n                // date picker dialog\r\n                datepicker = new DatePickerDialog(VehicleBooking.this,\r\n                        new DatePickerDialog.OnDateSetListener() {\r\n                            @Override\r\n                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {\r\n                                DateFrom.setText(dayOfMonth + \"/\" + (monthOfYear + 1) + \"/\" + year);\r\n                            }\r\n                        }, year, month, day);\r\n                datepicker.show();\r\n            }\r\n        });\r\n\r\n        DateTo.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                final Calendar cldr = Calendar.getInstance();\r\n                int day = cldr.get(Calendar.DAY_OF_MONTH);\r\n                int month = cldr.get(Calendar.MONTH);\r\n                int year = cldr.get(Calendar.YEAR);\r\n                // date picker dialog\r\n                datepicker = new DatePickerDialog(VehicleBooking.this,\r\n                        new DatePickerDialog.OnDateSetListener() {\r\n                            @Override\r\n                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {\r\n                                DateTo.setText(dayOfMonth + \"/\" + (monthOfYear + 1) + \"/\" + year);\r\n                            }\r\n                        }, year, month, day);\r\n                datepicker.show();\r\n            }\r\n        });\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/dell/rent4u/VehicleBooking.java	(revision 4e103d065f51ddf8e71500388cdce30d0eaa05e3)
++++ app/src/main/java/com/example/dell/rent4u/VehicleBooking.java	(date 1614006032565)
+@@ -5,6 +5,7 @@
+ 
+ import android.app.DatePickerDialog;
+ import android.content.Intent;
++import android.net.Uri;
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
+@@ -118,5 +119,22 @@
+             }
+         });
+ 
++        BookNow.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                sendSMS();
++            }
++        });
++
++    }
++    public void sendSMS()
++    {
++        String smsNumber = "9512484283";
++        String smsText = "hiii";
++
++        Uri uri = Uri.parse("smsto:" + smsNumber);
++        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
++        intent.putExtra("sms_body", smsText);
++        startActivity(intent);
+     }
+ }
+\ No newline at end of file
