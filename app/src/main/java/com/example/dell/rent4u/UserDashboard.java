@@ -29,6 +29,9 @@ public class UserDashboard extends AppCompatActivity implements View.OnClickList
     FirebaseUser userId;
     public int counter = 0;
 
+    static UserDataClass userDataClass;
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -80,10 +83,18 @@ public class UserDashboard extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Customer");
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Name").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tv_userName.setText("Welcome " + snapshot.getValue().toString());
+                userDataClass = new UserDataClass(snapshot.child("Address").getValue().toString(),
+                        snapshot.child("City").getValue().toString(),
+                        snapshot.child("City_PinCode").getValue().toString(),
+                        snapshot.child("Email").getValue().toString(),
+                        snapshot.child("License").getValue().toString(),
+                        snapshot.child("Mobile_no").getValue().toString(),
+                        snapshot.child("Name").getValue().toString(),
+                        snapshot.child("Password").getValue().toString());
+                tv_userName.setText("Welcome " + userDataClass.getName());
             }
 
             @Override

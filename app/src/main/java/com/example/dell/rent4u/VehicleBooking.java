@@ -24,13 +24,15 @@ import java.util.Calendar;
 
 public class VehicleBooking extends AppCompatActivity {
 
-    TextView name, tvRent, seating, tv_owner_name, tv_company_name,tv_Condition;
+    TextView name, tvRent, seating, tv_owner_name, tv_company_name, tv_Condition;
     EditText DateFrom, DateTo, Source, Destination;
     DatePickerDialog datepicker;
     Button BookNow;
 
     DatabaseReference databaseReference;
 
+    String userMobileNumber;
+    String providerMobileNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class VehicleBooking extends AppCompatActivity {
         Source = findViewById(R.id.Source);
         Destination = findViewById(R.id.Destination);
         BookNow = findViewById(R.id.BookNow);
+
+        Source.setText(UserDashboard.userDataClass.getAddress());
+
+        userMobileNumber = UserDashboard.userDataClass.getMobile_no();
 
         Intent intent = getIntent();
 
@@ -72,6 +78,7 @@ public class VehicleBooking extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tv_owner_name.setText("Owner Name: " + snapshot.child("Owner_Name").getValue());
                 tv_company_name.setText("Company Name: " + snapshot.child("Company_Name").getValue());
+                providerMobileNumber = snapshot.child("Contact No:").getValue().toString();
             }
 
             @Override
@@ -118,5 +125,8 @@ public class VehicleBooking extends AppCompatActivity {
             }
         });
 
+        BookNow.setOnClickListener(v -> {
+            
+        });
     }
 }
