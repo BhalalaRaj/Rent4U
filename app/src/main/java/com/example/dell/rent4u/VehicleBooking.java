@@ -35,7 +35,7 @@ public class VehicleBooking extends AppCompatActivity {
     DatePickerDialog datepicker;
     Button BookNow;
     String message;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     DatabaseReference databaseReference;
 
     String userMobileNumber;
@@ -131,31 +131,30 @@ public class VehicleBooking extends AppCompatActivity {
                 datepicker.show();
             }
         });
-     BookNow.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(getApplicationContext(), "clicked",
-                Toast.LENGTH_LONG).show();
-        sendSMSMessage();
-    }
-});
+        BookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "clicked",
+                        Toast.LENGTH_LONG).show();
+                sendSMSMessage();
+            }
+        });
     }
 
     public void sendSMSMessage() {
         //phoneNo = txtphoneNo.getText().toString();
-
-
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
                 == PackageManager.PERMISSION_GRANTED) {
-                SendSms();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
+            SendSms();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SEND_SMS);
         }
-    private void SendSms(){
+    }
+
+    private void SendSms() {
         message = "hiii";
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage("9512484283", null, message, null, null);
@@ -164,21 +163,22 @@ public class VehicleBooking extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage("9512484283", null, message, null, null);
-                    Toast.makeText(getApplicationContext(), "SMS sent.",
-                            Toast.LENGTH_LONG).show();
+                    SendSms();
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "SMS faild, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
+            }
+
+            default: {
+                return;
             }
         }
 
