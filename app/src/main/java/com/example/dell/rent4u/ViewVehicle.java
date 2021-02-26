@@ -65,7 +65,7 @@ public class ViewVehicle extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull VehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
-                makeText(ViewVehicle.this, vehicleDataClass.getRent(), LENGTH_SHORT).show();
+                //makeText(ViewVehicle.this, vehicleDataClass.getRent(), LENGTH_SHORT).show();
 
                 StorageReference mStorageRef = FirebaseStorage.getInstance().
                         getReferenceFromUrl(vehicleDataClass.getSide());
