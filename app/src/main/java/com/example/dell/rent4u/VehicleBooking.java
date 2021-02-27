@@ -40,7 +40,6 @@ public class VehicleBooking extends AppCompatActivity {
 
     String userMobileNumber;
     String providerMobileNumber;
-    VehicleDataClass vehicleDataClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class VehicleBooking extends AppCompatActivity {
         Intent intent = getIntent();
 
         Bundle itemBundle = intent.getExtras().getParcelable("VehicleDetail");
-        vehicleDataClass = itemBundle.getParcelable("VehicleDetail");
+        VehicleDataClass vehicleDataClass = itemBundle.getParcelable("VehicleDetail");
         ArrayList<String> imageUrl = new ArrayList<>();
         imageUrl.add(vehicleDataClass.getFront());
         imageUrl.add(vehicleDataClass.getInterior());
@@ -135,8 +134,7 @@ public class VehicleBooking extends AppCompatActivity {
         BookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "clicked",
-                        Toast.LENGTH_LONG).show();
+
                 sendSMSMessage();
             }
         });
@@ -156,18 +154,14 @@ public class VehicleBooking extends AppCompatActivity {
     }
 
     private void SendSms() {
-        message = "Booking Request for " + vehicleDataClass.getModelName() + ": " + vehicleDataClass.getNumberPlate() + " Customer Name:" + UserDashboard.userDataClass.getName()
-                + " From: " + DateFrom.getText() + " To: " + DateTo.getText() + " Contact No of Customer:" + UserDashboard.userDataClass.getMobile_no() +
-                " Source: " + Source.getText() + " Destination: " + Destination.getText();
+        message = "hiii";
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage("9512484283", null, message, null, null);
-        Toast.makeText(getApplicationContext(), "SMS sent.",
-                Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(), providerMobileNumber, Toast.LENGTH_LONG).show();
+
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
@@ -179,7 +173,6 @@ public class VehicleBooking extends AppCompatActivity {
                             "SMS faild, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                break;
             }
 
             default: {

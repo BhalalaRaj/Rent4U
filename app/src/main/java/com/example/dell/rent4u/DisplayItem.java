@@ -56,7 +56,9 @@ public class DisplayItem extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull UserVehicleViewHolder vehicleViewHolder, int i, @NonNull VehicleDataClass vehicleDataClass) {
-                makeText(DisplayItem.this, vehicleDataClass.getRent(), LENGTH_SHORT).show();
+
+                //makeText(DisplayItem.this, vehicleDataClass.getRent(), LENGTH_SHORT).show();
+
 
                 StorageReference mStorageRef = FirebaseStorage.getInstance().
                         getReferenceFromUrl(vehicleDataClass.getSide());
