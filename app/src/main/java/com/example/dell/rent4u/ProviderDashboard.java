@@ -43,15 +43,23 @@ public class ProviderDashboard extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
-            PROVIDER_DATA = new ProviderDataClass(user.getUid());
-        }
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Rental_Provider");
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child("Owner_Name").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                welcome_provider.setText("Welcome " + snapshot.getValue().toString());
+                PROVIDER_DATA = new ProviderDataClass(snapshot.child("Address").getValue().toString(),
+                        snapshot.child("City").getValue().toString(),
+                        snapshot.child("City_PinCode").getValue().toString(),
+                        snapshot.child("Company_Name").getValue().toString(),
+                        snapshot.child("Contact No:").getValue().toString(),
+                        snapshot.child("Email").getValue().toString(),
+                        snapshot.child("License").getValue().toString(),
+                        snapshot.child("Owner_Name").getValue().toString(),
+                        snapshot.child("Password").getValue().toString(),
+                        mAuth.getCurrentUser().getUid()
+                );
+                welcome_provider.setText("Welcome " + PROVIDER_DATA.getOwner_Name());
             }
 
             @Override

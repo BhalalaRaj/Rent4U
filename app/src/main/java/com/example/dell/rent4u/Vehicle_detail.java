@@ -132,7 +132,7 @@ public class Vehicle_detail extends AppCompatActivity {
         dataMap.put("Condition", condition_veh.getText().toString().trim());
         dataMap.put("Rent", rent.getText().toString().trim());
         dataMap.put("Seating", seating_cap.getText().toString().trim());
-        dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.id);
+        dataMap.put("Owner", ProviderDashboard.PROVIDER_DATA.getProviderId());
         dataMap.put("NumberPlate", Number_Plate.getText().toString().trim());
         dataMap.put("Front", "gs://rent4u-b7ee7.appspot.com/VehicleImages/" + VehicleId + "/front");
         dataMap.put("Side", "gs://rent4u-b7ee7.appspot.com/VehicleImages/" + VehicleId + "/side");

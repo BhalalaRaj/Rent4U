@@ -50,9 +50,13 @@ public class ViewVehicle extends AppCompatActivity {
         rv_vehicleList.setLayoutManager(new LinearLayoutManager(this));
 
 
+//        FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
+//                .setQuery(vehicleList.child("Vehicles").orderByChild("VehicleType").equalTo(vehicleType), VehicleDataClass.class)
+//                .build();
+
         final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
         FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
-                .setQuery(vehicleList.child("Vehicles"), VehicleDataClass.class)
+                .setQuery(vehicleList.child("Vehicles").orderByChild("Owner").equalTo(ProviderDashboard.PROVIDER_DATA.getProviderId()), VehicleDataClass.class)
                 .build();
 
         adapter = new FirebaseRecyclerAdapter<VehicleDataClass, VehicleViewHolder>(options) {
