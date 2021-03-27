@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,8 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VehicleBooking extends AppCompatActivity {
 
@@ -38,8 +41,15 @@ public class VehicleBooking extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     DatabaseReference databaseReference;
 
+    FirebaseAuth auth;
+
+    VehicleDataClass vehicleDataClass;
+
     String userMobileNumber;
     String providerMobileNumber;
+
+    String dateFrom;
+    String dateTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,8 @@ public class VehicleBooking extends AppCompatActivity {
         Destination = findViewById(R.id.Destination);
         BookNow = findViewById(R.id.BookNow);
 
+        auth = FirebaseAuth.getInstance();
+
         Source.setText(UserDashboard.userDataClass.getAddress());
 
         userMobileNumber = UserDashboard.userDataClass.getMobile_no();
@@ -65,7 +77,7 @@ public class VehicleBooking extends AppCompatActivity {
         Intent intent = getIntent();
 
         Bundle itemBundle = intent.getExtras().getParcelable("VehicleDetail");
-        VehicleDataClass vehicleDataClass = itemBundle.getParcelable("VehicleDetail");
+        vehicleDataClass = itemBundle.getParcelable("VehicleDetail");
         ArrayList<String> imageUrl = new ArrayList<>();
         imageUrl.add(vehicleDataClass.getFront());
         imageUrl.add(vehicleDataClass.getInterior());
@@ -106,6 +118,7 @@ public class VehicleBooking extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                dateFrom = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 DateFrom.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
@@ -125,6 +138,7 @@ public class VehicleBooking extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                dateTo = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 DateTo.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
@@ -134,10 +148,37 @@ public class VehicleBooking extends AppCompatActivity {
         BookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                bookVehicle();
                 sendSMSMessage();
             }
         });
+    }
+
+    private void bookVehicle() {
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("History");
+        Map bookingData = new HashMap<String, String>();
+        bookingData.put("UserName", UserDashboard.userDataClass.getName());
+        bookingData.put("UserAddress", UserDashboard.userDataClass.getAddress());
+        bookingData.put("UserUId", auth.getUid());
+        bookingData.put("UserContactNo", UserDashboard.userDataClass.getMobile_no());
+        bookingData.put("VehicleName", vehicleDataClass.getModelName());
+        bookingData.put("VehicleNumberPlate", vehicleDataClass.getNumberPlate());
+        bookingData.put("ProviderUid", vehicleDataClass.getOwner());
+        bookingData.put("VehicleId", vehicleDataClass.getVehicleId());
+        bookingData.put("Source", Source.getText().toString());
+        bookingData.put("Destination", Destination.getText().toString());
+        bookingData.put("BookingDate", dateFrom);
+        bookingData.put("ReturnDate", dateTo);
+        bookingData.put("VehicleImage", vehicleDataClass.getFront());
+
+        String bookingId = databaseReference.push().getKey();
+        databaseReference.child(bookingId).setValue(bookingData);
+
+        Toast.makeText(this, "Booking Done", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, UserDashboard.class));
+        finish();
+
     }
 
     public void sendSMSMessage() {
@@ -154,9 +195,13 @@ public class VehicleBooking extends AppCompatActivity {
     }
 
     private void SendSms() {
-        message = "hiii";
+        message = "Booking Request for " + vehicleDataClass.getModelName() + " : " + vehicleDataClass.getNumberPlate() +
+                " Customer Name: " + UserDashboard.userDataClass.getName() + " From: " + dateFrom + " To: " + dateTo +
+                "Contact No of Customer: " + UserDashboard.userDataClass.getMobile_no() +
+                " Source: " + Source.getText() + " Destination: " + Destination.getText();
+
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage("9512484283", null, message, null, null);
+        smsManager.sendTextMessage(providerMobileNumber, null, message, null, null);
 
     }
 

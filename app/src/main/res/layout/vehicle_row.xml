@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/row_seatingCapacity"
+            android:id="@+id/row_rider"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/row_vehicleName" />
 
         <TextView
-            android:id="@+id/row_vehicleType"
+            android:id="@+id/destination"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -67,10 +67,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-            app:layout_constraintTop_toBottomOf="@+id/row_seatingCapacity" />
+            app:layout_constraintTop_toBottomOf="@+id/row_rider" />
 
         <TextView
-            android:id="@+id/row_vehicleRent"
+            android:id="@+id/booking_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/row_vehicle_image"
-            app:layout_constraintTop_toBottomOf="@+id/row_vehicleType"
+            app:layout_constraintTop_toBottomOf="@+id/destination"
             app:layout_constraintVertical_bias="0.0" />
 
 

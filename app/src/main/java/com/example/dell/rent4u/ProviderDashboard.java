@@ -77,7 +77,7 @@ public class ProviderDashboard extends AppCompatActivity {
         btn_viewHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(ProviderDashboard.this, ViewVehicle.class));
+                startActivity(new Intent(ProviderDashboard.this, ViewHistoryActivity.class));
             }
         });
 

@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //
 
-import static android.widget.Toast.*;
 
 public class ViewVehicle extends AppCompatActivity {
 
@@ -49,10 +48,6 @@ public class ViewVehicle extends AppCompatActivity {
 
         rv_vehicleList.setLayoutManager(new LinearLayoutManager(this));
 
-
-//        FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
-//                .setQuery(vehicleList.child("Vehicles").orderByChild("VehicleType").equalTo(vehicleType), VehicleDataClass.class)
-//                .build();
 
         final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
         FirebaseRecyclerOptions<VehicleDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleDataClass>()
@@ -107,9 +102,9 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         image = itemView.findViewById(R.id.row_vehicle_image);
         vehicleName = itemView.findViewById(R.id.row_vehicleName);
-        seatingCapacity = itemView.findViewById(R.id.row_seatingCapacity);
-        vehicleType = itemView.findViewById(R.id.row_vehicleType);
-        rentPerKm = itemView.findViewById(R.id.row_vehicleRent);
+        seatingCapacity = itemView.findViewById(R.id.row_rider);
+        vehicleType = itemView.findViewById(R.id.destination);
+        rentPerKm = itemView.findViewById(R.id.booking_date);
     }
 }
 //

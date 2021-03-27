@@ -2,6 +2,11 @@
     <string name="app_name">Rent4U</string>
 
 
+    <string name="shared_pref_name">LOGIN_DETAIL</string>
+
+
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
     <string-array name="vehicleType">
         <item>Car</item>
         <item>Bus</item>
@@ -10,9 +15,4 @@
         <item>MiniBus</item>
         <item>MiniTruck</item>
     </string-array>
-
-
-    <string name="shared_pref_name">LOGIN_DETAIL</string>
-    <string name="email">EMAIL</string>
-    <string name="password">PASSWORD</string>
 </resources>

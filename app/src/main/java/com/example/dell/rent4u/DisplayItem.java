@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 
 public class DisplayItem extends AppCompatActivity {
@@ -105,8 +104,8 @@ class UserVehicleViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         image = itemView.findViewById(R.id.row_vehicle_image);
         vehicleName = itemView.findViewById(R.id.row_vehicleName);
-        seatingCapacity = itemView.findViewById(R.id.row_seatingCapacity);
-        vehicleType = itemView.findViewById(R.id.row_vehicleType);
-        rentPerKm = itemView.findViewById(R.id.row_vehicleRent);
+        seatingCapacity = itemView.findViewById(R.id.row_rider);
+        vehicleType = itemView.findViewById(R.id.destination);
+        rentPerKm = itemView.findViewById(R.id.booking_date);
     }
 }

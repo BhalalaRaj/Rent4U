@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dell.rent4u">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DisplayItem"/>
+        <activity android:name=".ViewHistoryActivity"></activity>
+        <activity android:name=".DisplayItem" />
         <activity android:name=".ViewVehicle" />
         <activity android:name=".Splash_Screen">
             <intent-filter>
@@ -32,9 +29,11 @@
         <activity android:name=".ProviderRegistration" />
         <activity android:name=".Login" />
         <activity android:name=".Bill" />
-        <activity android:name=".VehicleBooking"/>
+        <activity android:name=".VehicleBooking" />
     </application>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

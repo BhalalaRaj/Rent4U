@@ -94,7 +94,7 @@
         </soup.neumorphism.NeumorphCardView>
 
         <TextView
-            android:id="@+id/row_vehicleType"
+            android:id="@+id/destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/User_mobile"
             app:layout_constraintStart_toStartOf="@+id/User_mobile"
-            app:layout_constraintTop_toBottomOf="@+id/row_vehicleType"
+            app:layout_constraintTop_toBottomOf="@+id/destination"
             app:neumorph_shapeType="basin">
 
             <EditText

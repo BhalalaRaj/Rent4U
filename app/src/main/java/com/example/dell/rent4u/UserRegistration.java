@@ -91,7 +91,7 @@ public class UserRegistration extends AppCompatActivity {
         mDatabase.setValue(data);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId.getUid());
         Map<String, String> a = new HashMap<>();
-        a.put(userId.getUid(),"Customer");
+        a.put(userId.getUid(), "Customer");
         mDatabase.setValue(a);
         startActivity(new Intent(UserRegistration.this, Login.class));
         Toast.makeText(UserRegistration.this, "Your data Successfully Registered now you can Login", Toast.LENGTH_LONG).show();
