@@ -47,6 +47,7 @@ public class VehicleBooking extends AppCompatActivity {
 
     String userMobileNumber;
     String providerMobileNumber;
+    String companyName ;
 
     String dateFrom;
     String dateTo;
@@ -97,6 +98,7 @@ public class VehicleBooking extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tv_owner_name.setText("Owner Name: " + snapshot.child("Owner_Name").getValue());
                 tv_company_name.setText("Company Name: " + snapshot.child("Company_Name").getValue());
+                companyName = snapshot.child("Company_Name").getValue().toString();
                 providerMobileNumber = snapshot.child("Contact No:").getValue().toString();
             }
 
@@ -171,6 +173,7 @@ public class VehicleBooking extends AppCompatActivity {
         bookingData.put("BookingDate", dateFrom);
         bookingData.put("ReturnDate", dateTo);
         bookingData.put("VehicleImage", vehicleDataClass.getFront());
+        bookingData.put("CompanyName", companyName);
 
         String bookingId = databaseReference.push().getKey();
         databaseReference.child(bookingId).setValue(bookingData);

@@ -2,7 +2,6 @@ package com.example.dell.rent4u;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,33 +9,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class ViewHistoryActivity extends AppCompatActivity {
+public class UserBookingHistory extends AppCompatActivity {
 
+
+    RecyclerView rv_history;
     FirebaseRecyclerAdapter adapter;
-
-    RecyclerView rv_vehicleHistory;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_history);
+        setContentView(R.layout.activity_user_booking_history);
+
+        rv_history = findViewById(R.id.rv_history);
+        configureRecyclerView();
+
+    }
 
 
-        rv_vehicleHistory = findViewById(R.id.rv_vehicleHistory);
-
+    private void configureRecyclerView() {
         final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
         FirebaseRecyclerOptions<VehicleHistoryDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleHistoryDataClass>()
-                .setQuery(vehicleList.child("History").orderByChild("ProviderUid").equalTo(ProviderDashboard.PROVIDER_DATA.getProviderId()), VehicleHistoryDataClass.class)
+                .setQuery(vehicleList.child("History").orderByChild("UserUId").equalTo(FirebaseAuth.getInstance().getUid()), VehicleHistoryDataClass.class)
                 .build();
 
         adapter = new FirebaseRecyclerAdapter<VehicleHistoryDataClass, VehicleHistory>(options) {
@@ -54,15 +55,13 @@ public class ViewHistoryActivity extends AppCompatActivity {
                 StorageReference mStorageRef = FirebaseStorage.getInstance().
                         getReferenceFromUrl(dataClass.getVehicleImage());
 
-                GlideApp.with(ViewHistoryActivity.this).load(mStorageRef)
+                GlideApp.with(UserBookingHistory.this).load(mStorageRef)
                         .into(viewHolder.image);
 
                 viewHolder.bookingDate.setText(dataClass.getBookingDate());
-                viewHolder.riderName.setText(dataClass.getUserName());
+                viewHolder.riderName.setText(dataClass.getCompanyName());
                 viewHolder.row_vehicleName.setText(dataClass.getVehicleName() + " | " + dataClass.getVehicleNumberPlate());
                 viewHolder.destination.setText(dataClass.getDestination());
-
-                
 
             }
 
@@ -70,28 +69,8 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
         adapter.startListening();
-        rv_vehicleHistory.setLayoutManager(new LinearLayoutManager(this));
-        rv_vehicleHistory.setAdapter(adapter);
+        rv_history.setLayoutManager(new LinearLayoutManager(this));
+        rv_history.setAdapter(adapter);
 
-    }
-}
-
-
-
-class VehicleHistory extends RecyclerView.ViewHolder {
-    ImageView image;
-
-    CardView cardView;
-
-    TextView riderName, destination, bookingDate, row_vehicleName;
-
-    public VehicleHistory(@NonNull View itemView) {
-        super(itemView);
-        cardView = itemView.findViewById(R.id.cv_history);
-        image = itemView.findViewById(R.id.row_vehicle_image);
-        row_vehicleName = itemView.findViewById(R.id.row_vehicleName);
-        riderName = itemView.findViewById(R.id.row_rider);
-        destination = itemView.findViewById(R.id.destination);
-        bookingDate = itemView.findViewById(R.id.booking_date);
     }
 }

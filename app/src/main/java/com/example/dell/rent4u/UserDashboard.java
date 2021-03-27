@@ -3,11 +3,15 @@ package com.example.dell.rent4u;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -15,19 +19,28 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import soup.neumorphism.NeumorphButton;
 import soup.neumorphism.NeumorphImageButton;
 
 public class UserDashboard extends AppCompatActivity implements View.OnClickListener {
 
-    NeumorphImageButton btn_car, btn_bike, btn_truck, btn_miniTruck, btn_bus, btn_miniBus;
+    NeumorphImageButton btn_car, btn_bike, btn_truck, btn_miniTruck, btn_bus, btn_miniBus ;
+    NeumorphButton history;
     FirebaseAuth mAuth;
     TextView tv_userName;
     DatabaseReference mDatabase;
     FirebaseUser userId;
     public int counter = 0;
+
+    RecyclerView rv_history;
+    FirebaseRecyclerAdapter adapter;
 
     static UserDataClass userDataClass;
 
@@ -73,6 +86,8 @@ public class UserDashboard extends AppCompatActivity implements View.OnClickList
         btn_miniBus = findViewById(R.id.minibus);
         btn_miniTruck = findViewById(R.id.minitruck);
         btn_truck = findViewById(R.id.truck);
+        history = findViewById(R.id.btn_history);
+        rv_history = findViewById(R.id.rv_history);
 
         btn_bike.setOnClickListener(this);
         btn_car.setOnClickListener(this);
@@ -80,6 +95,13 @@ public class UserDashboard extends AppCompatActivity implements View.OnClickList
         btn_miniBus.setOnClickListener(this);
         btn_truck.setOnClickListener(this);
         btn_miniTruck.setOnClickListener(this);
+
+        history.setOnClickListener(v -> {
+            startActivity(new Intent(this, UserBookingHistory.class));
+
+        });
+
+
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Customer");
@@ -103,6 +125,46 @@ public class UserDashboard extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        configureRecyclerView();
+    }
+
+    private void configureRecyclerView() {
+        final DatabaseReference vehicleList = FirebaseDatabase.getInstance().getReference();
+        FirebaseRecyclerOptions<VehicleHistoryDataClass> options = new FirebaseRecyclerOptions.Builder<VehicleHistoryDataClass>()
+                .setQuery(vehicleList.child("History").orderByChild("UserUId").equalTo(mAuth.getUid()).limitToFirst(2), VehicleHistoryDataClass.class)
+                .build();
+
+        adapter = new FirebaseRecyclerAdapter<VehicleHistoryDataClass, VehicleHistory>(options) {
+            @NonNull
+            @Override
+            public VehicleHistory onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.on_rent_item, parent, false);
+                return new VehicleHistory(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull VehicleHistory viewHolder, int i, @NonNull VehicleHistoryDataClass dataClass) {
+                //makeText(ViewVehicle.this, vehicleHi.getRent(), LENGTH_SHORT).show();
+
+                StorageReference mStorageRef = FirebaseStorage.getInstance().
+                        getReferenceFromUrl(dataClass.getVehicleImage());
+
+                GlideApp.with(UserDashboard.this).load(mStorageRef)
+                        .into(viewHolder.image);
+
+                viewHolder.bookingDate.setText(dataClass.getBookingDate());
+                viewHolder.riderName.setText(dataClass.getCompanyName());
+                viewHolder.row_vehicleName.setText(dataClass.getVehicleName() + " | " + dataClass.getVehicleNumberPlate());
+                viewHolder.destination.setText(dataClass.getDestination());
+
+            }
+
+        };
+
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
+        rv_history.setLayoutManager(new LinearLayoutManager(this));
+        rv_history.setAdapter(adapter);
 
     }
 

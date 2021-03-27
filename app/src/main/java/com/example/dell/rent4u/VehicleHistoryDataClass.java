@@ -4,6 +4,7 @@ class VehicleHistoryDataClass {
 
     private String
             BookingDate,
+    CompanyName,
             Destination,
             ProviderUid,
             ReturnDate,
@@ -21,12 +22,9 @@ class VehicleHistoryDataClass {
     public VehicleHistoryDataClass() {
     }
 
-    public VehicleHistoryDataClass(String bookingDate, String destination,
-                                   String providerUid, String returnDate,
-                                   String source, String userAddress,
-                                   String userContactNo, String userName,
-                                   String userUId, String vehicleId, String vehicleImage, String vehicleName, String vehicleNumberPlate) {
+    public VehicleHistoryDataClass(String bookingDate, String companyName, String destination, String providerUid, String returnDate, String source, String userAddress, String userContactNo, String userName, String userUId, String vehicleId, String vehicleImage, String vehicleName, String vehicleNumberPlate) {
         BookingDate = bookingDate;
+        CompanyName = companyName;
         Destination = destination;
         ProviderUid = providerUid;
         ReturnDate = returnDate;
@@ -41,6 +39,9 @@ class VehicleHistoryDataClass {
         VehicleNumberPlate = vehicleNumberPlate;
     }
 
+    public String getCompanyName() {
+        return CompanyName;
+    }
 
     public String getBookingDate() {
         return BookingDate;

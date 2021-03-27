@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ViewHistoryActivity"></activity>
+        <activity android:name=".UserBookingHistory"></activity>
+        <activity android:name=".ViewHistoryActivity" />
         <activity android:name=".DisplayItem" />
         <activity android:name=".ViewVehicle" />
         <activity android:name=".Splash_Screen">
@@ -31,9 +32,9 @@
         <activity android:name=".Bill" />
         <activity android:name=".VehicleBooking" />
     </application>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>
