@@ -45,15 +45,50 @@ public class UserRegistration extends AppCompatActivity {
         submit = findViewById(R.id.BookNow);
         mAuth = FirebaseAuth.getInstance();
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crateAcc(useremail.getText().toString().trim(), userpassword.getText().toString().trim());
+        submit.setOnClickListener(v -> {
+            if(validateData()){
+                createAccount(useremail.getText().toString().trim(), userpassword.getText().toString().trim());
             }
         });
     }
 
-    private void crateAcc(String useremail, String userpassword) {
+    private boolean validateData() {
+        if(username.getText().toString().trim().isEmpty()){
+            toast("User Name is empty!");
+            return false;
+        }
+        if(usermobile.getText().toString().trim().isEmpty()){
+            toast("User Mobile is empty!");
+            return false;
+        }
+        if(useremail.getText().toString().trim().isEmpty()){
+            toast("User Email is empty!");
+            return false;
+        }
+        if(userpassword.getText().toString().trim().isEmpty()){
+            toast("User Password is empty!");
+            return false;
+        }
+        if(useraddress.getText().toString().trim().isEmpty()){
+            toast("User Address is empty!");
+            return false;
+        }
+        if(usercity.getText().toString().trim().isEmpty()){
+            toast("User city is empty!");
+            return false;
+        }
+        if(usercity_pincode.getText().toString().trim().isEmpty()){
+            toast("City pin is empty!");
+            return false;
+        }
+        return true;
+    }
+
+    private void toast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void createAccount(String useremail, String userpassword) {
 
         mAuth.createUserWithEmailAndPassword(useremail, userpassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

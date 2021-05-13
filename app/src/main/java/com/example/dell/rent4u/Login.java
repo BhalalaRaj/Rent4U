@@ -1,27 +1,23 @@
 package com.example.dell.rent4u;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import soup.neumorphism.NeumorphButton;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import soup.neumorphism.NeumorphButton;
 
 public class Login extends AppCompatActivity {
 
@@ -45,65 +41,62 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        login.setOnClickListener(v -> {
+            if (validateData()) {
                 startLogin(email.getText().toString().trim(), password.getText().toString().trim());
-               if (!(email.getText().toString().trim().equals("") && password.getText().toString().trim().equals(""))) {
-                } else {
-                    Toast.makeText(Login.this, "Empty Fields", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
-
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, UserRegistration.class));
             }
         });
 
-        provider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, ProviderRegistration.class));
-            }
-        });
+        user.setOnClickListener(v -> startActivity(new Intent(Login.this, UserRegistration.class)));
+
+        provider.setOnClickListener(v -> startActivity(new Intent(Login.this, ProviderRegistration.class)));
 
     }
 
+    private boolean validateData() {
+        if (email.getText().toString().trim().isEmpty()) {
+            toast("Email is empty!");
+            return false;
+        }
+        if (password.getText().toString().trim().isEmpty()) {
+            toast("Password is empty!");
+            return false;
+        }
+        return true;
+    }
+
+    private void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+
     public void startLogin(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    storeDataForLogin(email, password);
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
-                            if (userType.equals("Customer")) {
-                                Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Login.this, UserDashboard.class));
-                                finish();
-                            } else {
-                                Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Login.this, ProviderDashboard.class));
-                                finish();
-                            }
-
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                storeDataForLogin(email, password);
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
+                        if (userType.equals("Customer")) {
+                            Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(Login.this, UserDashboard.class));
+                            finish();
+                        } else {
+                            Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(Login.this, ProviderDashboard.class));
+                            finish();
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                } else {
-                    Toast.makeText(Login.this, "Invalid credentials :(", Toast.LENGTH_LONG).show();
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            } else {
+                Toast.makeText(Login.this, "Invalid credentials :(", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -114,6 +107,6 @@ public class Login extends AppCompatActivity {
         editor.putString(getString(R.string.email), email);
         editor.putString(getString(R.string.password), password);
         editor.apply();
-        Log.e("DATA STORED", email +" "+ password);
+        Log.e("DATA STORED", email + " " + password);
     }
 }

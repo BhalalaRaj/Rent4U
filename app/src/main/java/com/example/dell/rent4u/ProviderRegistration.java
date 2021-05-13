@@ -1,23 +1,17 @@
 package com.example.dell.rent4u;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,13 +19,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ProviderRegistration extends AppCompatActivity {
 
@@ -40,8 +35,8 @@ public class ProviderRegistration extends AppCompatActivity {
     EditText Cname, Owner_name, provider_email, provider_password, provider_address, provider_city, provider_pincode, provider_contactno;
     FirebaseStorage storage;
     StorageReference storageReference;
-    private Uri filePath1;
-    private Uri filePath2;
+    private Uri filePath1 = null;
+    private Uri filePath2 = null;
     FirebaseAuth mAuth;
     FirebaseUser userId;
     DatabaseReference mDatabase;
@@ -76,27 +71,64 @@ public class ProviderRegistration extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        adharupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SelectAdharImage();
-            }
-        });
+        adharupload.setOnClickListener(view -> SelectAdharImage());
 
-        licenseupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SelectLicenseImage();
-            }
-        });
+        licenseupload.setOnClickListener(view -> SelectLicenseImage());
 
-        Submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Submit.setOnClickListener(view -> {
+            if (validateData()) {
                 crateAcc(provider_email.getText().toString().trim(), provider_password.getText().toString().trim());
             }
         });
 
+    }
+
+    private boolean validateData() {
+        if (Cname.getText().toString().trim().isEmpty()) {
+            toast("Company name is empty!");
+            return false;
+        }
+        if (Owner_name.getText().toString().trim().isEmpty()) {
+            toast("Owner name is empty!");
+            return false;
+        }
+        if (provider_email.getText().toString().trim().isEmpty()) {
+            toast("Email is empty!");
+            return false;
+        }
+        if (provider_password.getText().toString().trim().isEmpty()) {
+            toast("Password is empty!");
+            return false;
+        }
+        if (provider_address.getText().toString().trim().isEmpty()) {
+            toast("Address is empty!");
+            return false;
+        }
+        if (provider_city.getText().toString().trim().isEmpty()) {
+            toast("City name is empty!");
+            return false;
+        }
+        if (provider_pincode.getText().toString().trim().isEmpty()) {
+            toast("Pin code is empty!");
+            return false;
+        }
+        if (Cname.getText().toString().trim().isEmpty()) {
+            toast("Company name is empty!");
+            return false;
+        }
+        if (filePath1 == null) {
+            toast("Adhar card is required!");
+            return false;
+        }
+        if (filePath2 == null) {
+            toast("License is required!");
+            return false;
+        }
+        return true;
+    }
+
+    private void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void crateAcc(String providerEmail, String providerPassword) {
@@ -208,33 +240,22 @@ public class ProviderRegistration extends AppCompatActivity {
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Image uploaded successfully
-                    // Dismiss dialog
-                    progressDialog.dismiss();
-                    Toast.makeText(ProviderRegistration.this, "Adhar Card Uploaded!!", Toast.LENGTH_SHORT).show();
-                    uploadImage2();
+            // Progress Listener for loading
+            // percentage on the dialog box
+            ref.putFile(filePath1).addOnSuccessListener(taskSnapshot -> {
+                // Image uploaded successfully
+                // Dismiss dialog
+                progressDialog.dismiss();
+                Toast.makeText(ProviderRegistration.this, "Adhar Card Uploaded!!", Toast.LENGTH_SHORT).show();
+                uploadImage2();
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                    // Error, Image not uploaded
-                    progressDialog.dismiss();
-                    Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                // Progress Listener for loading
-                // percentage on the dialog box
-                @Override
-                public void onProgress(
-                        UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploading " + (int) progress + "%");
-                }
+            }).addOnFailureListener(e -> {
+                // Error, Image not uploaded
+                progressDialog.dismiss();
+                Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }).addOnProgressListener(taskSnapshot -> {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                progressDialog.setMessage("Uploading " + (int) progress + "%");
             });
         }
     }
@@ -251,34 +272,22 @@ public class ProviderRegistration extends AppCompatActivity {
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            // Progress Listener for loading
+            // percentage on the dialog box
+            ref.putFile(filePath2).addOnSuccessListener(taskSnapshot -> {
+                // Image uploaded successfully
+                // Dismiss dialog
+                progressDialog.dismiss();
+                Toast.makeText(ProviderRegistration.this, "License Uploaded!!", Toast.LENGTH_SHORT).show();
+                writeUser(data);
+            }).addOnFailureListener(e -> {
 
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Image uploaded successfully
-                    // Dismiss dialog
-                    progressDialog.dismiss();
-                    Toast.makeText(ProviderRegistration.this, "License Uploaded!!", Toast.LENGTH_SHORT).show();
-                    writeUser(data);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                    // Error, Image not uploaded
-                    progressDialog.dismiss();
-                    Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                // Progress Listener for loading
-                // percentage on the dialog box
-                @Override
-                public void onProgress(
-                        UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploading " + (int) progress + "%");
-                }
+                // Error, Image not uploaded
+                progressDialog.dismiss();
+                Toast.makeText(ProviderRegistration.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }).addOnProgressListener(taskSnapshot -> {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                progressDialog.setMessage("Uploading " + (int) progress + "%");
             });
         }
     }
