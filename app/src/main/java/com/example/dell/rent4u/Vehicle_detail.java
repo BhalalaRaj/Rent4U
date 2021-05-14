@@ -50,7 +50,7 @@ public class Vehicle_detail extends AppCompatActivity {
     int SIDE_IMAGE_CODE = 2;
     int INTERIOR_IMAGE_CODE = 3;
 
-    private Uri frontImagePath, sideImagePath, interiorImagePath;
+    private Uri frontImagePath = null , sideImagePath = null , interiorImagePath = null;
 
 
     @Override
@@ -78,44 +78,63 @@ public class Vehicle_detail extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
-        Front_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectFrontImage();
-            }
-        });
+        Front_img.setOnClickListener(v -> selectFrontImage());
 
-        Front_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectFrontImage();
-            }
-        });
+        Front_upload.setOnClickListener(v -> selectFrontImage());
 
-        Interior_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectInteriorImage();
-            }
-        });
+        Interior_upload.setOnClickListener(v -> selectInteriorImage());
 
-        Side_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectSideImage();
-            }
-        });
+        Side_upload.setOnClickListener(v -> selectSideImage());
 
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submit.setOnClickListener(v -> {
+            if(validateVehicleData()) {
                 getUniqueVehicleId();
                 uploadFrontImage();
             }
         });
 
 
+    }
+
+    private boolean validateVehicleData() {
+        if(Model_name.getText().toString().trim().isEmpty()){
+            toast("Model name is empty!");
+            return false;
+        }
+        if(city_ava.getText().toString().trim().isEmpty()){
+            toast("City name is empty!");
+            return false;
+        }
+        if(condition_veh.getText().toString().trim().isEmpty()){
+            toast("Vehicle condition is empty!");
+            return false;
+        }
+        if(rent.getText().toString().trim().isEmpty()){
+            toast("Rent amount is empty!");
+            return false;
+        }
+        if(Number_Plate.getText().toString().trim().isEmpty()){
+            toast("Vehicle number plate is empty!");
+            return false;
+        }
+        if(frontImagePath == null){
+            toast("Vehicle front image is required!");
+            return false;
+        }
+        if(sideImagePath == null){
+            toast("Side image is required!");
+            return false;
+        }
+        if(interiorImagePath == null){
+            toast("Vehicle interior image is required!");
+            return false;
+        }
+        return true;
+    }
+
+    private void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void getUniqueVehicleId() {

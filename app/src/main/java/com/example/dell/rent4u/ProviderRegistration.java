@@ -100,6 +100,10 @@ public class ProviderRegistration extends AppCompatActivity {
             toast("Password is empty!");
             return false;
         }
+        if(provider_contactno.getText().toString().trim().isEmpty()) {
+            toast("Contact No is empty!");
+            return false;
+        }
         if (provider_address.getText().toString().trim().isEmpty()) {
             toast("Address is empty!");
             return false;
@@ -134,32 +138,29 @@ public class ProviderRegistration extends AppCompatActivity {
     private void crateAcc(String providerEmail, String providerPassword) {
 
         mAuth.createUserWithEmailAndPassword(providerEmail, providerPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in userId's information
-                            userId = mAuth.getCurrentUser();
-                            data = new HashMap<>();
-                            data.put("Company_Name", Cname.getText().toString().trim());
-                            data.put("Owner_Name", Owner_name.getText().toString().trim());
-                            data.put("Email", providerEmail);
-                            data.put("Password", providerPassword);
-                            data.put("Address", provider_address.getText().toString().trim());
-                            data.put("City", provider_city.getText().toString().trim());
-                            data.put("Contact No:", provider_contactno.getText().toString().trim());
-                            data.put("City_PinCode", provider_pincode.getText().toString().trim());
-                            data.put("License", "false");
-                            uploadImage1();
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in userId's information
+                        userId = mAuth.getCurrentUser();
+                        data = new HashMap<>();
+                        data.put("Company_Name", Cname.getText().toString().trim());
+                        data.put("Owner_Name", Owner_name.getText().toString().trim());
+                        data.put("Email", providerEmail);
+                        data.put("Password", providerPassword);
+                        data.put("Address", provider_address.getText().toString().trim());
+                        data.put("City", provider_city.getText().toString().trim());
+                        data.put("Contact No:", provider_contactno.getText().toString().trim());
+                        data.put("City_PinCode", provider_pincode.getText().toString().trim());
+                        data.put("License", "false");
+                        uploadImage1();
 
-                            Toast.makeText(ProviderRegistration.this, "Authentication Successful.",
-                                    Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProviderRegistration.this, "Authentication Successful.",
+                                Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            // If sign in fails, display a message to the userId.
-                            Toast.makeText(ProviderRegistration.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        // If sign in fails, display a message to the userId.
+                        Toast.makeText(ProviderRegistration.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }

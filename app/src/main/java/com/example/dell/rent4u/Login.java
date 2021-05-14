@@ -81,11 +81,9 @@ public class Login extends AppCompatActivity {
                         String userType = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue().toString();
                         if (userType.equals("Customer")) {
-                            Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
                             startActivity(new Intent(Login.this, UserDashboard.class));
                             finish();
                         } else {
-                            Toast.makeText(Login.this, userType, Toast.LENGTH_LONG).show();
                             startActivity(new Intent(Login.this, ProviderDashboard.class));
                             finish();
                         }

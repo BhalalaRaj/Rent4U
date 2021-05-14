@@ -108,52 +108,62 @@ public class VehicleBooking extends AppCompatActivity {
         });
 
 
-        DateFrom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                datepicker = new DatePickerDialog(VehicleBooking.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dateFrom = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                DateFrom.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                datepicker.show();
-            }
+        DateFrom.setOnClickListener(v -> {
+            final Calendar cldr = Calendar.getInstance();
+            int day = cldr.get(Calendar.DAY_OF_MONTH);
+            int month = cldr.get(Calendar.MONTH);
+            int year = cldr.get(Calendar.YEAR);
+            // date picker dialog
+            datepicker = new DatePickerDialog(VehicleBooking.this,
+                    (view, year1, monthOfYear, dayOfMonth) -> {
+                        dateFrom = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                        DateFrom.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1);
+                    }, year, month, day);
+            datepicker.show();
         });
 
-        DateTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                datepicker = new DatePickerDialog(VehicleBooking.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dateTo = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                DateTo.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                datepicker.show();
-            }
+        DateTo.setOnClickListener(v -> {
+            final Calendar cldr = Calendar.getInstance();
+            int day = cldr.get(Calendar.DAY_OF_MONTH);
+            int month = cldr.get(Calendar.MONTH);
+            int year = cldr.get(Calendar.YEAR);
+            // date picker dialog
+            datepicker = new DatePickerDialog(VehicleBooking.this,
+                    (view, year12, monthOfYear, dayOfMonth) -> {
+                        dateTo = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year12;
+                        DateTo.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year12);
+                    }, year, month, day);
+            datepicker.show();
         });
-        BookNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        BookNow.setOnClickListener(view -> {
+            if(validateBookingData()) {
                 bookVehicle();
                 sendSMSMessage();
             }
         });
+    }
+
+    private boolean validateBookingData() {
+        if(DateFrom.getText().toString().trim().isEmpty()){
+            toast("Select booking date!");
+            return false;
+        }
+        if(DateTo.getText().toString().trim().isEmpty()){
+            toast("Select vehicle return date!");
+            return false;
+        }
+        if(Source.getText().toString().trim().isEmpty()){
+            toast("Source is empty!");
+            return false;
+        }
+        if(Destination.getText().toString().trim().isEmpty()){
+            toast("Destination is empty!");
+            return false;
+        }
+        return false;
+    }
+    private void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void bookVehicle() {
@@ -218,7 +228,7 @@ public class VehicleBooking extends AppCompatActivity {
                     SendSms();
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                            "SMS failed, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }
